@@ -159,6 +159,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Login\LoginHomePage.cshtml" />
     <Content Include="Views\Login\PrintDetails.cshtml" />
+    <Content Include="Views\Login\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

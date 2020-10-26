@@ -29,5 +29,11 @@ namespace Cinema_WebSite.Controllers
 
             return View("PrintDetails",uslogin);
         }
+
+
+    public ActionResult SignUp()
+        {
+            return View("SignUp");
+        }
     }
 }
