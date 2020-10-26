@@ -15,19 +15,11 @@ namespace Cinema_WebSite.Controllers
             return View();
         }
 
-        public ActionResult LoginHomePage() { 
 
-            return View();
-        }
 
-        public ActionResult Submit()
+    public ActionResult PrintDetails()
         {
-            UsersLogin uslogin = new UsersLogin();
-            uslogin.UserName = Request.Form["UserName"];
-            uslogin.Password = Request.Form["Password"];
-
-
-            return View("PrintDetails",uslogin);
+            return View();
         }
 
 

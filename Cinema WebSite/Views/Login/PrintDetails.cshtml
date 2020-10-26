@@ -11,19 +11,20 @@
     <meta name="viewport" content="width=device-width" />
     <title>PrintDetails</title>
     <style>
-        body {
-            background-image: url('https://cdn.artphotolimited.com/images/5b9fc1ecac06024957be8806/700x700/charlie-chaplin-dans-les-temps-modernes.jpg');
-            margin: 0;
-            
-        }
+    body { background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg'); 
+           margin: 0; 
+           padding: 0; 
+           font-family: sans-serif; 
+           background-size: cover; 
+           background-position:center; }
 
         input[type=submit] {
-            background-color: black;
+            background-color: darkred;
             border: none;
-            color: whitesmoke;
+            color: white;
             padding: 12px 15px;
             text-decoration: none;
-            margin: 4px 2px;
+            margin: 2px 2px;
             cursor: pointer;
         }
 
@@ -34,17 +35,32 @@
         }
 
         center {
-            height: 200px;
+            height: 100%;
             text-align: center;
+            background-color: white;
         }
 
         aside {
             float: right;
             padding: 1em;
-            height: 900px;
-            width: 35%;
+            height:550px;
+            width: 32%;
             background-color: white;
+            
         }
+
+
+        .inputbox {
+          
+            border-radius: 30px;
+            padding: 5px;
+            height:20px;
+            width: 185px;
+            border: 1px solid #918787;
+            outline: none;
+        }
+
+
     </style>
 </head>
 <body>
@@ -58,17 +74,19 @@
                                 Sign into your CinemaCity account<br />
                                 <br /><br />
 
-                                <b><FONT face="Candara" style="margin-right: 125px; margin-top: 0px;">LOGIN</FONT></b>
+                                <b><FONT face="Candara" style=" margin-right: 125px;">LOGIN</FONT></b>
                                 <br />
 
-                                <input id="Text1" name="UserName" type="text" />
+                                <input id="Text1" type="text" class="inputbox" placeholder="Username" name="Username" /><br />
                                 <br /><br />
 
 
-                                <b><FONT face="Candara" style="margin-right: 85px; margin-top: 0px;">PASSWORD</FONT></b>
+                                <b><FONT face="Candara" style="margin-right: 85px;">PASSWORD</FONT></b>
                                 <br />
-                                <input id="Text1" name="Password" type="text" />
+                                <input id="Text1" type="text" class="inputbox" placeholder="Password" name="Password"/><br />
                                 <br /><br />
+
+
 
 
                                 <input id="submit" type="submit" value="Sign in" />
@@ -82,7 +100,6 @@
                                     )
 
 
-
                             </form>
             </center>
 
@@ -92,10 +109,6 @@
 </body>
 </html>
 
-<! <center>
-    Username : @Model.UserName
-    <br />
-    Password : @Model.Password
-</center>
+
 >
 

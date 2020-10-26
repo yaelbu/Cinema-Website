@@ -11,35 +11,70 @@
     <meta name="viewport" content="width=device-width" />
     <title>SignUp</title>
     <style>
-        body {
-            background-image: url('https://cdn.artphotolimited.com/images/5b9fc1ecac06024957be8806/700x700/charlie-chaplin-dans-les-temps-modernes.jpg');
-            margin: 0;
+    body { background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg'); margin: 0; padding: 0; font-family: sans-serif; background-size: cover; background-position: center; }
+
+
+
+    .sign-up-form{
+        width:325px;
+        height:400px;
+        box-shadow:0 0 3px 0 rgba(0,0,0,0.3);
+        background:#fff;
+        padding:20px;
+        margin: 8% auto 0;
+        text-align:center;
+        margin-bottom:20px;
+        margin-top:65px;
+
+    }
+
+    .sign-btn{
+        color:#fff;
+        width:100%;
+        padding:10px;
+        border-radius:20px;
+        font-size:15px;
+        margin:10px 0;
+        border:none;
+        outline:none;
+        cursor:pointer;
+        background-color:darkred;
+        
+    }
+
+        .input-box {
+            border-radius: 15px;
+            padding: 5px;
+            height: 15px;
+            width: 225px;
+            border: 1px solid #918787;
+            outline: none;
         }
 
-
-  
-
-
-        aside {
-            
-            padding: 1em;
-            height: 900px;
-            width: 35%;
-            background-color: white;
-        }
-
+    
 
     </style>
 </head>
 <body>
-    <div>
-        <aside>
-            <center>
-                gfgsfgsfg
-            </center>
+    <div class="sign-up-form">
+        <h1>Sign Up Now</h1>
+        <form>
+            <br /> 
+            <input id="Text1" type="text" class="input-box" placeholder="FirstName" /><br />
+            <br />
+            <input id="Text1" type="text" class="input-box" placeholder="LastName" /><br />
+            <br />
+            <input id="Text1" type="email" class="input-box" placeholder="Email" /><br />
+            <br />
+            <input id="Text1" type="text" class="input-box" placeholder="Username" /><br />
+            <br />
+            <input id="Text1" type="password" class="input-box" placeholder="Password" /><br />
 
-        </aside>
-           
+            <br /><br />
+            <button type="button" class="sign-btn">Sign in</button>
+
+        </form>
+
 
     </div>
 </body>
