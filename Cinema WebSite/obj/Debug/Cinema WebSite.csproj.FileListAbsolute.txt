@@ -77,3 +77,7 @@ C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.cs
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.csproj.CopyComplete
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.dll
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.pdb
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.SqlServer.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.SqlServer.xml

@@ -1,4 +1,4 @@
-﻿@model Cinema_WebSite.Models.UsersLogin
+﻿@model Cinema_WebSite.Models.MembersLogin
 
 @{
     Layout = null;
@@ -17,14 +17,14 @@
 
     .sign-up-form{
         width:325px;
-        height:400px;
+        height:475px;
         box-shadow:0 0 3px 0 rgba(0,0,0,0.3);
         background:#fff;
         padding:20px;
         margin: 8% auto 0;
         text-align:center;
-        margin-bottom:20px;
-        margin-top:65px;
+        margin-bottom:50px;
+        margin-top:55px;
 
     }
 
@@ -51,29 +51,55 @@
             outline: none;
         }
 
-    
-
+        .error{
+            color:darkred;
+            font-family:Candara;
+            font-size:70%;
+            font-weight:bold;
+        }
     </style>
 </head>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+
+
 <body>
     <div class="sign-up-form">
         <h1>Sign Up Now</h1>
-        <form>
-            <br /> 
-            <input id="Text1" type="text" class="input-box" placeholder="FirstName" /><br />
+        <form action="Register" method="post">
             <br />
-            <input id="Text1" type="text" class="input-box" placeholder="LastName" /><br />
-            <br />
-            <input id="Text1" type="email" class="input-box" placeholder="Email" /><br />
-            <br />
-            <input id="Text1" type="text" class="input-box" placeholder="Username" /><br />
-            <br />
-            <input id="Text1" type="password" class="input-box" placeholder="Password" /><br />
-
+            @Html.TextBoxFor(x => x.FirstName, new { placeholder = "FirstName", @class = "input-box", @id = "Text1", @type = "text", value = Model.FirstName })
+            <br />@Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "error" })
             <br /><br />
-            <button type="button" class="sign-btn">Sign in</button>
 
+
+            @Html.TextBoxFor(x => x.LastName, new { placeholder = "LastName", @class = "input-box", @id = "Text1", @type = "text", value = Model.LastName })
+            <br />@Html.ValidationMessageFor(x => x.LastName, "", new { @class = "error" })
+            <br /><br />
+
+            @Html.TextBoxFor(x => x.Email, new { placeholder = "Email", @class = "input-box", @id = "Text1", @type = "email", value = Model.Email })
+            <br />@Html.ValidationMessageFor(x => x.Email, "", new { @class = "error" })
+            <br /><br />
+
+            @Html.TextBoxFor(x => x.Username, new { placeholder = "Username", @class = "input-box", @id = "Text1", @type = "text", value = Model.Username })
+            <br />@Html.ValidationMessageFor(x => x.Username, "", new { @class = "error" })
+            <br /><br />
+
+
+            @Html.TextBoxFor(x => x.Password, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password", value = Model.Password })
+            <br />@Html.ValidationMessageFor(x => x.Password, "", new { @class = "error" })
+            <br /><br />
+
+
+       
+            <input id="submit1" type="submit" class="sign-btn" value="Sign in">
         </form>
+       
 
 
     </div>

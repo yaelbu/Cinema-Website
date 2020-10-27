@@ -16,7 +16,7 @@ namespace Cinema_WebSite
             routes.MapRoute(
                 name: "Login",
                 url: "",
-                defaults: new { controller = "Login", action = "PrintDetails", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
 );
 
 

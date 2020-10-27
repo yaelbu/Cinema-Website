@@ -1,0 +1,128 @@
+﻿@model Cinema_WebSite.Models.MembersLogin
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg');
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-size: cover;
+            background-position: center;
+        }
+
+        input[type=submit] {
+            background-color: darkred;
+            border: none;
+            color: white;
+            padding: 12px 15px;
+            text-decoration: none;
+            margin: 2px 2px;
+            cursor: pointer;
+        }
+
+        left {
+            float: left;
+            text-align: left;
+        }
+
+        center {
+            height: 100%;
+            text-align: center;
+            background-color: white;
+        }
+
+        aside {
+            float: right;
+            padding: 1em;
+            height: 550px;
+            width: 32%;
+            background-color: white;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+        }
+
+
+        .inputbox {
+            border-radius: 30px;
+            padding: 5px;
+            height: 20px;
+            width: 185px;
+            border: 1px solid #918787;
+            outline: none;
+        }
+    </style>
+</head>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+
+
+
+
+<body>
+    <div>
+        <aside>
+            <center>
+                <br /><br /><br /><br />
+                <FONT size="15" face="Berlin Sans FB">CinemaCity</FONT>
+                <br /><br /><br /><br />
+
+                @using (Html.BeginForm("signIn", "Login", FormMethod.Post))
+                {
+
+
+                    <div>Sign into your CinemaCity account</div>
+                    <br />
+
+                    <b><FONT face="Candara" style=" margin-right: 125px;">LOGIN</FONT></b>
+                    <br />
+
+                    @Html.TextBoxFor(x => x.Username, new { placeholder = "Username", @class = "inputbox", @id = "Text1", @type = "text" })
+                    <br /><br />
+
+
+                    <b><FONT face="Candara" style="margin-right: 85px;">PASSWORD</FONT></b>
+                    <br />
+                   
+
+                    @Html.TextBoxFor(x => x.Password, new { placeholder = "Password", @class = "inputbox", @id = "Text1", @type = "text" })
+                    <br /><br />
+
+
+
+                    <input id="submit" type="submit" value="Sign in" />
+                    <br /><br />
+
+                    <div>
+                        Don't have an account?
+                        @Html.ActionLink(
+                            linkText: "    Click Here",
+                            actionName: "SignUp",
+                            controllerName: "Login"
+                            )
+                    </div>
+
+                }
+            </center>
+
+        </aside>
+
+    </div>
+</body>
+</html>
+
+
