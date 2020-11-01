@@ -32,11 +32,6 @@ namespace Cinema_WebSite.Controllers
 
 
 
-        public ActionResult ImageTest()
-        {
-            return View("ImageTest");
-        }
-
         public ActionResult Register(MembersLogin uslo)
         {
             

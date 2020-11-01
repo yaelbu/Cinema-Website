@@ -154,11 +154,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\images\chicago.jpeg" />
     <Content Include="Content\images\hg.jpg" />
     <Content Include="Content\images\hp.jpg" />
     <Content Include="Content\images\la.jpg" />
-    <Content Include="Content\images\ny.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -182,7 +180,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\SignUp.cshtml" />
-    <Content Include="Views\Login\ImageTest.cshtml" />
     <Content Include="Views\Login\Priiiint.cshtml" />
     <Content Include="Views\Administrator\AdministratorHome.cshtml" />
   </ItemGroup>
