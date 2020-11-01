@@ -25,6 +25,12 @@ namespace Cinema_WebSite
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Default1",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Login", action = "ImageTest", id = UrlParameter.Optional }
+);
         }
     }
 }

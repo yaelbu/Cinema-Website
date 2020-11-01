@@ -32,7 +32,7 @@ namespace Cinema_WebSite.Controllers
 
 
 
-        public ActionResult Imagee()
+        public ActionResult ImageTest()
         {
             return View("ImageTest");
         }
@@ -64,6 +64,7 @@ namespace Cinema_WebSite.Controllers
             return View("Login", uslo);
         }    
                     
+
 
     }
 }
