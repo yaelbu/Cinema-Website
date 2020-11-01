@@ -32,6 +32,22 @@ namespace Cinema_WebSite.Controllers
 
 
 
+    public ActionResult ImageeNew()
+        {
+            return View();
+        }
+
+    public ActionResult ScrolllDown()
+        {
+            return View();
+        }
+
+
+        public ActionResult Imagee()
+        {
+            return View();
+        }
+
         public ActionResult Register(MembersLogin uslo)
         {
             

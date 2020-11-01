@@ -57,6 +57,9 @@
             font-size:70%;
             font-weight:bold;
         }
+
+       
+
     </style>
 </head>
 
@@ -73,30 +76,33 @@
         <h1>Sign Up Now</h1>
         <form action="Register" method="post">
             <br />
+            
             @Html.TextBoxFor(x => x.FirstName, new { placeholder = "First Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.FirstName })
             <br />@Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "error" })
             <br /><br />
 
-
+           
             @Html.TextBoxFor(x => x.LastName, new { placeholder = "Last Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.LastName })
             <br />@Html.ValidationMessageFor(x => x.LastName, "", new { @class = "error" })
             <br /><br />
 
+            
             @Html.TextBoxFor(x => x.Email, new { placeholder = "Email", @class = "input-box", @id = "Text1", @type = "email", value = Model.Email })
             <br />@Html.ValidationMessageFor(x => x.Email, "", new { @class = "error" })
             <br /><br />
 
+            
             @Html.TextBoxFor(x => x.Username, new { placeholder = "Username", @class = "input-box", @id = "Text1", @type = "text", value = Model.Username })
             <br />@Html.ValidationMessageFor(x => x.Username, "", new { @class = "error" })
             <br /><br />
 
-
+            
             @Html.TextBoxFor(x => x.Password, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password", value = Model.Password })
             <br />@Html.ValidationMessageFor(x => x.Password, "", new { @class = "error" })
             <br /><br />
 
 
-       
+
             <input id="submit1" type="submit" class="sign-btn" value="Sign in">
         </form>
        

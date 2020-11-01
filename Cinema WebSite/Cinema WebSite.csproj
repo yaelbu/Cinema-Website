@@ -149,6 +149,7 @@
     <Content Include="Content\images\paysage1.jpg" />
     <Content Include="Content\images\paysage2.jpg" />
     <Content Include="Content\images\paysage3.jpg" />
+    <Content Include="Content\images\Scenee.jpg" />
     <Content Include="Content\images\The_maze_runner-ConvertImage.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -182,6 +183,7 @@
     <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Login\Priiiint.cshtml" />
     <Content Include="Views\Administrator\AdministratorHome.cshtml" />
+    <Content Include="Views\Login\Imagee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
