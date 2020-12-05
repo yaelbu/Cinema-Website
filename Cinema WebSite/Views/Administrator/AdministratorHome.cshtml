@@ -1,5 +1,8 @@
-﻿
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+
+
 @{
+    ViewBag.Title = "AdministratorHome";
     Layout = null;
 }
 
@@ -11,7 +14,7 @@
     <title>AdministratorHome</title>
     <style>
         body {
-            background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg');
+            background-image: url('https://www.telegramdownload.com/wp-content/uploads/2015/12/telegram-messenger-admins.jpg');
             margin: 0;
             padding: 0;
             font-family: sans-serif;
@@ -19,15 +22,125 @@
             background-position: center;
         }
 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            font-family: Arial;
+        }
+
+            /* Links inside the navbar */
+            .navbar a {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+        /* The dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+            /* Dropdown button */
+            .dropdown .dropbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit; /* Important for vertical align on mobile phones */
+                margin: 0; /* Important for vertical align on mobile phones */
+            }
+
+            /* Add a red background color to navbar links on hover */
+            .navbar a:hover, .dropdown:hover .dropbtn {
+                background-color: red;
+            }
+
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                float: none;
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+                /* Add a grey background color to dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+
+
     </style>
 
 
 
-</head >
-    <body >
-        <div >
-        
-        </div >
-    </body >
-</html >
+</head>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+
+
+
+
+<body>
+    <div>
+        <h1>Admin Home !!!!!</h1>
+
+
+
+        <form class="navbar">
+            <a href="#home">Add Movies</a>
+
+            <a href="#news">Delete Movies</a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Dropdown
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+
+
+    </div>
+</body>
+</html>
 

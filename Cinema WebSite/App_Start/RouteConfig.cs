@@ -16,7 +16,7 @@ namespace Cinema_WebSite
             routes.MapRoute(
                 name: "Login",
                 url: "",
-                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "HomeLogin", id = UrlParameter.Optional }
 );
 
 
@@ -28,9 +28,27 @@ namespace Cinema_WebSite
 
             routes.MapRoute(
                 name: "Default1",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "ImageTest", id = UrlParameter.Optional }
+                url: "Login/SignIn",
+                defaults: new { controller = "Login", action = "signIn", id = UrlParameter.Optional }
 );
+          
+
+
+            routes.MapRoute(
+                name: "AdministratorHome",
+                url: "Administrator/AdministratorHome",
+                defaults: new { controller = "Administrator", action = "AdministratorHome", id = UrlParameter.Optional }
+);
+
+
+
+            routes.MapRoute(
+                name: "ClientHome",
+                url: "Client/ClientHome",
+                defaults: new { controller = "Client", action = "ClientHome", id = UrlParameter.Optional }
+);
+
+
         }
     }
 }

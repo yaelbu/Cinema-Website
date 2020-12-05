@@ -1,0 +1,86 @@
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddMovies</title>
+</head>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+
+
+<body>
+    <div>
+
+
+        
+
+        @using (Html.BeginForm("Savee", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <br />
+            <i>Title :</i>
+            @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
+            <br /><br />
+
+            <br />
+            <i> Poster :</i>
+            @Html.LabelFor(x => x.MVMovie.ImagePath, new { placeholder = "ImagePath", @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="file" name="file" />
+            </div>
+
+
+
+
+
+
+            <br />
+            <i>Realisator :</i>
+            @Html.TextBoxFor(x => x.MVMovie.Realisator, new { placeholder = "Realisator", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Realisator, "", new { @class = "error" })
+            <br /><br />
+
+
+
+            <br />
+            <i>Category :</i>
+            @Html.TextBoxFor(x => x.MVMovie.Category, new { placeholder = "Category", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
+            <br /><br />
+
+
+
+
+
+            <i> Price :</i>
+            @Html.TextBoxFor(x => x.MVMovie.Price, new { placeholder = "Price", @class = "input-box", @id = "Text1", @type = "text" })
+            <br /> @Html.ValidationMessageFor(x => x.MVMovie.Price, "", new { @class = "error" })
+            <br /><br />
+
+
+            <input id="submit1" type="submit" class="sign-btn" value="Save">
+
+        }
+
+
+
+    </div>
+</body>
+</html>

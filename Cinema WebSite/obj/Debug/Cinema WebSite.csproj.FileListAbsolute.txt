@@ -72,7 +72,6 @@ C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Web.WebPages.Raz
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Newtonsoft.Json.xml
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Antlr3.Runtime.pdb
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.csprojAssemblyReference.cache
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.csproj.CoreCompileInputs.cache
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.csproj.CopyComplete
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.dll
@@ -81,3 +80,30 @@ C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.dll
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.SqlServer.dll
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.xml
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\EntityFramework.SqlServer.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Logging.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Options.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Remotion.Linq.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Collections.Immutable.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Interactive.Async.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Caching.Abstractions.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Caching.Memory.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Logging.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Options.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\Remotion.Linq.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Collections.Immutable.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Interactive.Async.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.csprojAssemblyReference.cache

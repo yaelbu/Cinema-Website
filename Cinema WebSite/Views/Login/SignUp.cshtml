@@ -1,4 +1,4 @@
-﻿@model Cinema_WebSite.Models.MembersLogin
+﻿@model Cinema_WebSite.ModelView.CineViewModel
 
 @{
     Layout = null;
@@ -11,23 +11,28 @@
     <meta name="viewport" content="width=device-width" />
     <title>SignUp</title>
     <style>
-    body { background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg'); 
-           margin: 0; padding: 0; font-family: sans-serif; background-size: cover; background-position: center; }
+        body {
+            background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg');
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-size: cover;
+            background-position: center;
+        }
 
 
 
-    .sign-up-form{
-        width:325px;
-        height:475px;
-        box-shadow:0 0 3px 0 rgba(0,0,0,0.3);
-        background:#fff;
-        padding:20px;
-        margin: 8% auto 0;
-        text-align:center;
-        margin-bottom:50px;
-        margin-top:55px;
-
-    }
+        .sign-up-form {
+            width: 325px;
+            height: 475px;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 55px;
+        }
 
         .sign-btn {
             color: #fff;
@@ -51,15 +56,12 @@
             outline: none;
         }
 
-        .error{
-            color:darkred;
-            font-family:Candara;
-            font-size:70%;
-            font-weight:bold;
+        .error {
+            color: darkred;
+            font-family: Candara;
+            font-size: 70%;
+            font-weight: bold;
         }
-
-       
-
     </style>
 </head>
 
@@ -74,38 +76,36 @@
 <body>
     <div class="sign-up-form">
         <h1>Sign Up Now</h1>
-        <form action="Register" method="post">
+
+        @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+        {
+
             <br />
-            
-            @Html.TextBoxFor(x => x.FirstName, new { placeholder = "First Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.FirstName })
-            <br />@Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "error" })
+
+            @Html.TextBoxFor(x => x.MVUser.FirstName, new { placeholder = "First Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.MVUser.FirstName })
+            <br />@Html.ValidationMessageFor(x => x.MVUser.FirstName, "", new { @class = "error" })
             <br /><br />
 
-           
-            @Html.TextBoxFor(x => x.LastName, new { placeholder = "Last Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.LastName })
-            <br />@Html.ValidationMessageFor(x => x.LastName, "", new { @class = "error" })
+
+            @Html.TextBoxFor(x => x.MVUser.LastName, new { placeholder = "Last Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.MVUser.LastName })
+            <br />@Html.ValidationMessageFor(x => x.MVUser.LastName, "", new { @class = "error" })
             <br /><br />
 
-            
-            @Html.TextBoxFor(x => x.Email, new { placeholder = "Email", @class = "input-box", @id = "Text1", @type = "email", value = Model.Email })
-            <br />@Html.ValidationMessageFor(x => x.Email, "", new { @class = "error" })
+
+            @Html.TextBoxFor(x => x.MVUser.Email, new { placeholder = "Email", @class = "input-box", @id = "Text1", @type = "email", value = Model.MVUser.Email })
+            <br />@Html.ValidationMessageFor(x => x.MVUser.Email, "", new { @class = "error" })
             <br /><br />
 
-            
-            @Html.TextBoxFor(x => x.Username, new { placeholder = "Username", @class = "input-box", @id = "Text1", @type = "text", value = Model.Username })
-            <br />@Html.ValidationMessageFor(x => x.Username, "", new { @class = "error" })
-            <br /><br />
 
-            
-            @Html.TextBoxFor(x => x.Password, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password", value = Model.Password })
-            <br />@Html.ValidationMessageFor(x => x.Password, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.MVUser.Password, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password", value = Model.MVUser.Password })
+            <br />@Html.ValidationMessageFor(x => x.MVUser.Password, "", new { @class = "error" })
             <br /><br />
 
 
 
             <input id="submit1" type="submit" class="sign-btn" value="Sign in">
-        </form>
-       
+
+        }
 
 
     </div>
