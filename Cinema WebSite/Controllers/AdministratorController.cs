@@ -31,9 +31,39 @@ namespace Cinema_WebSite.Controllers
             return View();
         }
 
+
+
         public ActionResult DeleteMovies()
         {
+            MovieData movdat = new MovieData();
+            //CineViewModel cvm = new CineViewModel();
+            var get_titles = movdat.MoviesData.ToList();
+            //cvm.MVMovies = movdat.MoviesData.ToList();
+      
+             SelectList list = new SelectList(get_titles, "Cagetory","Title");
+            ViewBag.list_titles = list;
+
             return View();
+        }
+
+
+        //public ActionResult DeleteMovies(List<Movie> movies)
+        //{ return View("ListMovies",movies);
+        //}
+
+        public ActionResult ListMovies()
+        {
+
+
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+
+
+            Movie movie = new Movie();
+
+            cvm.MVMovies = movdat.MoviesData.ToList();
+
+            return View("DeleteMovies",cvm);
         }
 
 
@@ -76,18 +106,57 @@ namespace Cinema_WebSite.Controllers
     }
 }
 
-
-
-
 /*
-        @using (Html.BeginForm("AddMovies", "Administrator", FormMethod.Post, new { id="logoutForm", @class = "navbar-left" }))
-        {
-            <button>Add a movie</button>
-        }
+
+        < div style = "border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;" >
+ 
+             < center >
+ 
 
 
-        @using (Html.BeginForm("DeleteMovies", "Administrator"))
-        {
-            <button>Delete a movie</button>
-        }
- */
+
+                 < br />
+ 
+
+                 < span style = "color:rebeccapurple" > Time Table </ span >
+     
+                     < br />
+     
+                     < center >
+     
+                         < table >
+     
+                             < tr >
+     
+                                 < td > Title </ td >
+     
+                                 < td > Realisator </ td >
+     
+                                 < td > Category </ td >
+     
+                                 < td > Price </ td >
+     
+                                 < td > Poster </ td >
+     
+                             </ tr >
+                             @foreach(Movie x in Model.MVMovies)
+                        {
+                            < tr >
+                                < td > @x.Title </ td >
+                                < td > @x.Realisator </ td >
+                                < td > @x.Category </ td >
+                                < td > @x.Price </ td >
+                                < td > < img src = "@Url.Content(x.ImagePath)" height = "100" width = "100" > </ td >
+       
+                                   </ tr >
+                        }
+
+                    </ table >
+                </ center >
+
+
+
+                < p >< p />
+            </ center >
+        </ div >
+*/

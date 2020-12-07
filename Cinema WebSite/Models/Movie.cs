@@ -30,4 +30,19 @@ namespace Cinema_WebSite.Models
         public int Price { get; set; }
 
     }
+
+    public enum Category
+    {
+        Action,
+        Adventure,
+        Comedy,
+        Crime,
+        Drama,
+        Fantasy,
+        Horror,
+        Romance,
+        ScienceFiction,
+        Thriller,
+        Western
+    }
 }

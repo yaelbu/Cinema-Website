@@ -1,4 +1,5 @@
 ﻿@model Cinema_WebSite.ModelView.CineViewModel
+    @using Cinema_WebSite.Models
 
 @{
     Layout = null;
@@ -28,7 +29,7 @@
     <div>
 
 
-        
+
 
         @using (Html.BeginForm("Savee", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -61,11 +62,9 @@
 
             <br />
             <i>Category :</i>
-            @Html.TextBoxFor(x => x.MVMovie.Category, new { placeholder = "Category", @class = "input-box", @id = "Text1", @type = "text" })
+            @Html.DropDownListFor(x=>x.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "Category")
             <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
             <br /><br />
-
-
 
 
 
