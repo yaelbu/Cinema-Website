@@ -327,6 +327,7 @@
     <Content Include="Content\images\hg.jpg" />
     <Content Include="Content\images\hp.jpg" />
     <Content Include="Content\images\la.jpg" />
+    <Content Include="images\1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -355,10 +356,12 @@
     <Content Include="Views\Administrator\Print.cshtml" />
     <Content Include="Views\Administrator\AddMovies.cshtml" />
     <Content Include="Views\Administrator\DeleteMovies.cshtml" />
+    <Content Include="Views\Administrator\ManageMovies.cshtml" />
+    <Content Include="Views\Administrator\ManageHalls.cshtml" />
+    <Content Include="Views\Administrator\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

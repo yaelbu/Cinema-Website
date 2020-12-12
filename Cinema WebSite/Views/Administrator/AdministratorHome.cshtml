@@ -1,5 +1,5 @@
 ﻿@model Cinema_WebSite.ModelView.CineViewModel
-
+@using Cinema_WebSite.Models
 
 @{
     ViewBag.Title = "AdministratorHome";
@@ -27,10 +27,8 @@
             overflow: hidden;
             background-color: #333;
             font-family: Arial;
-            opacity:.8;
-            text-align:center;
-            
-            
+            opacity: .8;
+            text-align: center;
         }
 
             /* Links inside the navbar */
@@ -98,6 +96,21 @@
         }
 
 
+        
+        .container {
+            height: 200px;
+            position: relative;
+            border: 3px solid green;
+        }
+
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
 
 
     </style>
@@ -119,32 +132,21 @@
 <body>
     <div>
 
+            <div class="center">
+                @using (Html.BeginForm("Submit1", "Administrator", FormMethod.Get))
+                {
+                    <button>Manage Movies</button>
+                }
+                <br />
+                @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Get))
+                {
+                    <button>Manage Halls</button>
+                }
 
-        <form class="navbar">
-            <a href="#news">@Html.ActionLink("Add Movies", "AddMovies", "Administrator")</a>
-            <a href="#news">@Html.ActionLink("Delete Movies", "DeleteMovies", "Administrator")</a>
-            <div class="dropdown">
-                <button class="dropbtn">
-                    Others
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#news">@Html.ActionLink("Delete Movies", "DeleteMovies", "Administrator")</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
                 </div>
             </div>
-        </form>
 
-      
-
-
-
-
-
-
-
-    </div>
+           
 </body>
 </html>
 

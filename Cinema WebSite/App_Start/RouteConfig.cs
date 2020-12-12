@@ -34,11 +34,15 @@ namespace Cinema_WebSite
           
 
 
+
+
+
             routes.MapRoute(
                 name: "AdministratorHome",
-                url: "Administrator/AdministratorHome",
+                url: "Administrator/{action}",
                 defaults: new { controller = "Administrator", action = "AdministratorHome", id = UrlParameter.Optional }
 );
+
 
 
 

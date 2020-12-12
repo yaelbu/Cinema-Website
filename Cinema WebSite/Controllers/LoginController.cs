@@ -74,26 +74,35 @@ namespace Cinema_WebSite.Controllers
             user.Password = Request.Form["MVUser.Password"].ToString();
 
 
-            List<User> list_users = (from x in m.UsersData where x.Email.Contains(user.Email) && x.Password.Contains(user.Password) select x).ToList<User>();
+            List<User> list_users1 = (from x in m.UsersData where x.Email.Contains(user.Email) && x.Password.Contains(user.Password) select x).ToList<User>();
+
+            List<User> list_users2 = (from x in m.UsersData where x.Email.Contains(user.Email) select x).ToList<User>();
+
 
             uvm.MVUser = user;
 
             if (ModelState.IsValid)
             {
-                if(CheckIn(user) ==true && list_users.Count==1)
+                if(CheckIn(user) ==true && list_users1.Count==1)
                 {
-                        if (list_users.First().Status == "Admin")
+                        if (list_users1.First().Status == "Admin")
                         {
-                            Session["Username"] = list_users.First().Email;
+                            Session["Username"] = list_users1.First().Email;
                             return RedirectToRoute("AdministratorHome", user);
                         }
-                        else if (list_users.First().Status == "Client")
+                        else if (list_users1.First().Status == "Client")
                         {
-                            Session["Username"] = list_users.First().Email;
+                            Session["Username"] = list_users1.First().Email;
                             return RedirectToRoute("ClientHome", user);
                         }
                     }
-                    else 
+                else if(list_users1.Count==0 && list_users2.Count==1)
+                {
+                    ModelState.AddModelError("uvm.User.Username","Password not correct");//check to print the error
+                }
+                    else
+                    
+
                     {
                          ModelState.AddModelError("uvm.User.Username", String.Empty);
                     }

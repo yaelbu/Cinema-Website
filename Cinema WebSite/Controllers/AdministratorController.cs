@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Cinema_WebSite.Models;
 using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Cinema_WebSite.Controllers
 {
@@ -24,32 +27,53 @@ namespace Cinema_WebSite.Controllers
             return View();
         }
 
+        public ActionResult ManageMovies(List<Movie> co)
+     {
+            return View();
+        }
+
+       
+        public ActionResult submit1()
+        {
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+            List<Movie> co =
+               (from d in movdat.MoviesData select d).ToList();
+
+            cvm.MVMovies = co;
+            return View("ManageMovies",cvm);
+        }
+
+
+        public ActionResult ManageHalls()
+        {
+            return View();
+        }
 
         public ActionResult AddMovies()
         {
-
             return View();
         }
 
-
-
-        public ActionResult DeleteMovies()
+        [HttpPost]
+        public ActionResult Delete(string id)
         {
             MovieData movdat = new MovieData();
-            //CineViewModel cvm = new CineViewModel();
-            var get_titles = movdat.MoviesData.ToList();
-            //cvm.MVMovies = movdat.MoviesData.ToList();
-      
-             SelectList list = new SelectList(get_titles, "Cagetory","Title");
-            ViewBag.list_titles = list;
+            CineViewModel cvm = new CineViewModel();
+            Movie mov = movdat.MoviesData.Find(id);
+            movdat.MoviesData.Remove(mov);
+            movdat.SaveChanges();
+            cvm.MVMovie = new Movie();
+            
+                return View("AdministratorHome");
 
-            return View();
+
         }
 
 
-        //public ActionResult DeleteMovies(List<Movie> movies)
-        //{ return View("ListMovies",movies);
-        //}
+
+
+
 
         public ActionResult ListMovies()
         {
@@ -160,3 +184,27 @@ namespace Cinema_WebSite.Controllers
             </ center >
         </ div >
 */
+
+
+
+
+
+/*
+ 
+ 
+        <form class="navbar">
+            <a href="#news">@Html.ActionLink("Add Movies", "AddMovies", "Administrator")</a>
+            <a href="#news">@Html.ActionLink("Delete Movies", "DeleteMovies", "Administrator")</a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Others
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#news">@Html.ActionLink("Delete Movies", "DelMovies", "Administrator")</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+        </form>
+ */

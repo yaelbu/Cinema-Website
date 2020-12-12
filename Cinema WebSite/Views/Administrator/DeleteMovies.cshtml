@@ -1,6 +1,6 @@
-﻿
-
-@{
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+{
     Layout = null;
 }
 
@@ -16,21 +16,6 @@
 
 
 
-
-        <br />
-        <i>Select the movie you want to delete :</i>
-
-       
-    
-      @Html.DropDownList("Title", ViewBag.list_titles as SelectList,"Select Title")
-
-
-
-
-
-
-
-
-    </div>
-</body>
+        </div>
+    </body>
 </html>
