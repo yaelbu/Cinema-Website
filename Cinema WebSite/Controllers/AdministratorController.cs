@@ -27,21 +27,99 @@ namespace Cinema_WebSite.Controllers
             return View();
         }
 
-        public ActionResult ManageMovies(List<Movie> co)
-     {
-            return View();
+        public ActionResult ManageMovies()
+        {
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+            cvm.MVMovies = movdat.MoviesData.ToList();
+            return View(cvm);
         }
 
-       
+
         public ActionResult submit1()
         {
             MovieData movdat = new MovieData();
             CineViewModel cvm = new CineViewModel();
-            List<Movie> co =
-               (from d in movdat.MoviesData select d).ToList();
+            cvm.MVMovie = new MovieNew();
 
-            cvm.MVMovies = co;
-            return View("ManageMovies",cvm);
+            cvm.MVMovie.Title = Request.Form["MVMovie.Title"].ToString();
+            cvm.MVMovie.ImagePath = Request.Form["MVMovie.ImagePath"].ToString();
+            cvm.MVMovie.Category = Request.Form["MVMovie.Category"].ToString();
+            cvm.MVMovie.Limitation_Age = Request.Form["MVMovie.Limitation_Age"].ToString();
+            cvm.MVMovie.Date = Convert.ToDateTime(Request.Form["MVMovie.Date"]);
+            cvm.MVMovie.Hall = Request.Form["MVMovie.Hall"].ToString();
+
+            //String imageName = System.IO.Path.GetFileName(file.FileName);
+            //String physcialPath = Server.MapPath("~/images/" + imageName);
+            //file.SaveAs(physcialPath);
+            //cvm.MVMovie.ImagePath = "~/images/" + imageName;
+
+
+            List<MovieNew> co1 = (from d in movdat.MoviesData where (d.Date == cvm.MVMovie.Date) && (d.Hall.Contains(cvm.MVMovie.Hall)) select d).ToList();//check if there is already a movie on the same date, in the same hall
+
+            if (co1.Count > 0)
+            {
+                ModelState.AddModelError("cvm.MVMovie.Date", "There is already a movie at the same time, in the same hall");
+            }
+
+
+            List<MovieNew> co2 =//all the movies that are in the same date, on the same hour in the same hall
+                (from d in movdat.MoviesData
+                 where
+(d.Date == cvm.MVMovie.Date)
+&& ((d.BeginHourMovie == cvm.MVMovie.BeginHourMovie && (d.EndHourMovie == cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| (d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie < cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| ((d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.BeginHourMovie) && d.EndHourMovie < cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && cvm.MVMovie.BeginHourMovie < d.EndHourMovie && d.Hall == cvm.MVMovie.Hall)))
+                 select d).ToList<MovieNew>();
+
+
+            if (co2.Count > 0)
+            {
+                ModelState.AddModelError("cvm.MVMovie.BeginHourMovie", "There is already a mvoie at this hours, in this hall");
+            }
+
+
+
+
+
+
+
+            List<MovieNew> co3 =//check if the movie already plays in the same day at the same hours
+                (from d in movdat.MoviesData
+                 where
+d.Title == cvm.MVMovie.Title && d.Date == cvm.MVMovie.Date
+&& d.Date == cvm.MVMovie.Date
+&& (
+(d.BeginHourMovie == cvm.MVMovie.BeginHourMovie && d.EndHourMovie == cvm.MVMovie.EndHourMovie)
+|| (d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie < cvm.MVMovie.EndHourMovie)
+|| ((d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.BeginHourMovie) && d.EndHourMovie < cvm.MVMovie.EndHourMovie)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && cvm.MVMovie.BeginHourMovie < d.EndHourMovie)
+)
+                 select d).ToList<MovieNew>();
+
+            if (co3.Count > 0)
+            {
+                ModelState.AddModelError("cvm.MVMovie.Title", "The movie is already plays  at the same hours on the same day");
+            }
+
+
+            if (co1.Count > 0 || co2.Count > 0 || co3.Count > 0)
+            {
+                return View("AddMovies");
+            }
+
+            if (ModelState.IsValid)
+            {
+                movdat.MoviesData.Add(cvm.MVMovie);
+                movdat.SaveChanges();
+                cvm.MVMovie = new MovieNew();
+                return View("AdministratorHome");
+            }
+
+            return View("ManageMovies", cvm);
         }
 
 
@@ -50,29 +128,28 @@ namespace Cinema_WebSite.Controllers
             return View();
         }
 
-        public ActionResult AddMovies()
-        {
-            return View();
-        }
 
         [HttpPost]
         public ActionResult Delete(string id)
         {
             MovieData movdat = new MovieData();
             CineViewModel cvm = new CineViewModel();
-            Movie mov = movdat.MoviesData.Find(id);
+            MovieNew mov = movdat.MoviesData.Find(id);
             movdat.MoviesData.Remove(mov);
             movdat.SaveChanges();
-            cvm.MVMovie = new Movie();
-            
-                return View("AdministratorHome");
+            cvm.MVMovie = new MovieNew();
+
+            return View("AdministratorHome");
 
 
         }
 
 
 
-
+        public ActionResult AddMovies()
+        {
+            return View();
+        }
 
 
         public ActionResult ListMovies()
@@ -87,124 +164,101 @@ namespace Cinema_WebSite.Controllers
 
             cvm.MVMovies = movdat.MoviesData.ToList();
 
-            return View("DeleteMovies",cvm);
+            return View("DeleteMovies", cvm);
         }
 
 
         [HttpPost]
         public ActionResult Savee(HttpPostedFileBase file)
         {
-                MovieData movdat = new MovieData();
-                CineViewModel cvm = new CineViewModel();
-                Movie movie = new Movie();
-              
-            
-            movie.Title = Request.Form["MVMovie.Title"].ToString();
-            movie.Realisator = Request.Form["MVMovie.Realisator"].ToString();
-            movie.Category = Request.Form["MVMovie.Category"].ToString();
-            movie.Price = int.Parse(Request.Form["MVMovie.Price"]);
-            String imageName= System.IO.Path.GetFileName(file.FileName);
+
+
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+            cvm.MVMovie = new MovieNew();
+
+            cvm.MVMovie.Title = Request.Form["MVMovie.Title"].ToString();
+            //cvm.MVMovie.ImagePath = Request.Form["MVMovie.ImagePath"].ToString();
+            cvm.MVMovie.Category = Request.Form["MVMovie.Category"].ToString();
+            cvm.MVMovie.Limitation_Age = Request.Form["MVMovie.Limitation_Age"].ToString();
+            cvm.MVMovie.Price = int.Parse(Request.Form["MVMovie.Price"]);
+            cvm.MVMovie.Date = Convert.ToDateTime(Request.Form["MVMovie.Date"]);
+            cvm.MVMovie.Hall = Request.Form["MVMovie.Hall"].ToString();
+            cvm.MVMovie.BeginHourMovie = int.Parse(Request.Form["MVMovie.BeginHourMovie"]);
+            cvm.MVMovie.EndHourMovie = int.Parse(Request.Form["MVMovie.EndHourMovie"]);
+
+            String imageName = System.IO.Path.GetFileName(file.FileName);
             String physcialPath = Server.MapPath("~/images/" + imageName);
             file.SaveAs(physcialPath);
-            movie.ImagePath = physcialPath;
+            cvm.MVMovie.ImagePath = "~/images/" + imageName;
 
-            ViewBag.Titlee = movie.Title;
+
+            List<MovieNew> co1 = (from d in movdat.MoviesData where (d.Date == cvm.MVMovie.Date) && (d.Hall.Contains(cvm.MVMovie.Hall)) select d).ToList();//check if there is already a movie on the same date, in the same hall
+
+            if (co1.Count > 0)
+            {
+                ModelState.AddModelError("cvm.MVMovie.Date", "There is already a movie at the same time, in the same hall");
+            }
+
+
+            List<MovieNew> co2 =//all the movies that are in the same date, on the same hour in the same hall
+                (from d in movdat.MoviesData
+                 where
+(d.Date == cvm.MVMovie.Date)
+&& ((d.BeginHourMovie == cvm.MVMovie.BeginHourMovie && (d.EndHourMovie == cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| (d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie < cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| ((d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.BeginHourMovie) && d.EndHourMovie < cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && cvm.MVMovie.BeginHourMovie < d.EndHourMovie && d.Hall == cvm.MVMovie.Hall)))
+                 select d).ToList<MovieNew>();
+
+
+            if (co2.Count > 0)
+            {
+                ModelState.AddModelError("cvm.MVMovie.BeginHourMovie", "There is already a mvoie at this hours, in this hall");
+            }
+
+
+
+
+
+
+
+            List<MovieNew> co3 =//check if the movie already plays in the same day at the same hours
+                (from d in movdat.MoviesData
+                 where
+d.Title == cvm.MVMovie.Title && d.Date == cvm.MVMovie.Date
+&& d.Date == cvm.MVMovie.Date
+&& (
+(d.BeginHourMovie == cvm.MVMovie.BeginHourMovie && d.EndHourMovie == cvm.MVMovie.EndHourMovie)
+|| (d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie < cvm.MVMovie.EndHourMovie)
+|| ((d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.BeginHourMovie) && d.EndHourMovie < cvm.MVMovie.EndHourMovie)
+|| (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && cvm.MVMovie.BeginHourMovie < d.EndHourMovie)
+)
+                 select d).ToList<MovieNew>();
+
+            if (co3.Count > 0)
+            {
+                ModelState.AddModelError("cvm.MVMovie.Title", "The movie is already plays  at the same hours on the same day");
+            }
+
+
+            if (co1.Count > 0 || co2.Count > 0 || co3.Count > 0)
+            {
+                return View("AddMovies");
+            }
 
             if (ModelState.IsValid)
             {
-                movdat.MoviesData.Add(movie);
+                movdat.MoviesData.Add(cvm.MVMovie);
                 movdat.SaveChanges();
-                cvm.MVMovie = new Movie();
+                cvm.MVMovie = new MovieNew();
+                return View("AdministratorHome");
             }
-            else
-            {
-                cvm.MVMovie = movie;
-                return View(cvm);
-            }
-          
 
-
-            return View("Print");
+            return View("ManageMovies", cvm);
         }
 
     }
 }
-
-/*
-
-        < div style = "border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;" >
- 
-             < center >
- 
-
-
-
-                 < br />
- 
-
-                 < span style = "color:rebeccapurple" > Time Table </ span >
-     
-                     < br />
-     
-                     < center >
-     
-                         < table >
-     
-                             < tr >
-     
-                                 < td > Title </ td >
-     
-                                 < td > Realisator </ td >
-     
-                                 < td > Category </ td >
-     
-                                 < td > Price </ td >
-     
-                                 < td > Poster </ td >
-     
-                             </ tr >
-                             @foreach(Movie x in Model.MVMovies)
-                        {
-                            < tr >
-                                < td > @x.Title </ td >
-                                < td > @x.Realisator </ td >
-                                < td > @x.Category </ td >
-                                < td > @x.Price </ td >
-                                < td > < img src = "@Url.Content(x.ImagePath)" height = "100" width = "100" > </ td >
-       
-                                   </ tr >
-                        }
-
-                    </ table >
-                </ center >
-
-
-
-                < p >< p />
-            </ center >
-        </ div >
-*/
-
-
-
-
-
-/*
- 
- 
-        <form class="navbar">
-            <a href="#news">@Html.ActionLink("Add Movies", "AddMovies", "Administrator")</a>
-            <a href="#news">@Html.ActionLink("Delete Movies", "DeleteMovies", "Administrator")</a>
-            <div class="dropdown">
-                <button class="dropbtn">
-                    Others
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#news">@Html.ActionLink("Delete Movies", "DelMovies", "Administrator")</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
-        </form>
- */

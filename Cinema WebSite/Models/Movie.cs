@@ -20,7 +20,7 @@ namespace Cinema_WebSite.Models
 
         [Required]
         [DisplayName("Upload File")]
-        public String ImagePath { get; set; }
+        public string ImagePath { get; set; }
 
        
         [Required]
@@ -30,7 +30,7 @@ namespace Cinema_WebSite.Models
         public int Price { get; set; }
 
     }
-
+    /*
     public enum Category
     {
         Action,
@@ -44,5 +44,5 @@ namespace Cinema_WebSite.Models
         ScienceFiction,
         Thriller,
         Western
-    }
+    }*/
 }

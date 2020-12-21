@@ -132,18 +132,19 @@
 <body>
     <div>
 
-            <div class="center">
-                @using (Html.BeginForm("Submit1", "Administrator", FormMethod.Get))
-                {
-                    <button>Manage Movies</button>
-                }
-                <br />
-                @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Get))
-                {
-                    <button>Manage Halls</button>
-                }
+        <div class="center">
+            @using (Html.BeginForm("ManageMovies", "Administrator", FormMethod.Get))
+            {
+                <button>Manage Movies</button>
+            }
+            <br />
 
-                </div>
+            @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Get))
+            {
+                <button>Manage Halls</button>
+            }
+
+        </div>
             </div>
 
            

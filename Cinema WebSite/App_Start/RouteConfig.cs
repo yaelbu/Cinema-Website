@@ -28,8 +28,8 @@ namespace Cinema_WebSite
 
             routes.MapRoute(
                 name: "Default1",
-                url: "Login/SignIn",
-                defaults: new { controller = "Login", action = "signIn", id = UrlParameter.Optional }
+                url: "Login/SignUp",
+                defaults: new { controller = "Login", action = "signUp", id = UrlParameter.Optional }
 );
           
 

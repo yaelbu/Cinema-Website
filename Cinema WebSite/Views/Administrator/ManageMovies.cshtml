@@ -27,21 +27,25 @@
     <div>
         <a>@Html.ActionLink("Add Movies", "AddMovies", "Administrator")</a>
 
+        <br />
 
-
-        @foreach (Movie x in Model.MVMovies)
+        @foreach (MovieNew x in Model.MVMovies)
         {
+
             using (Html.BeginForm("Delete", "Administrator", new { id = x.Title }))
             {
-                <tr>
-                    <td><img src="@Url.Content(x.ImagePath)" height="100" width="100" /></td>
-                    <td>@x.Title</td>
-                    <td>@x.Realisator</td>
-                    <td>
-                        @Html.ActionLink("Edit", "AddMovies", "Administrator") |
-                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete record with ID = @x.Title');" />
-                    </td>
-                </tr>
+                <p>
+                    <tr>
+                        <td><img src="@Url.Content(x.ImagePath)" height="100" width="100" /></td>
+                        <td>@x.Title</td>
+                        
+                        <td>
+                            @Html.ActionLink("Edit", "AddMovies", "Administrator") |
+                            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete record with ID = @x.Title');" />
+                        </td>
+                    </tr>
+                    <br /><br /><br /><br /><br /><br />
+                </p>
             }
 
         }
