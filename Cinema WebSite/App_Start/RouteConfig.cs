@@ -31,18 +31,15 @@ namespace Cinema_WebSite
                 url: "Login/SignUp",
                 defaults: new { controller = "Login", action = "signUp", id = UrlParameter.Optional }
 );
-          
-
-
-
 
 
             routes.MapRoute(
-                name: "AdministratorHome",
-                url: "Administrator/{action}",
-                defaults: new { controller = "Administrator", action = "AdministratorHome", id = UrlParameter.Optional }
-);
+              name: "AdministratorHome",
+              url: "Administrator/AdministratorHome",
+              defaults: new { controller = "Administrator", action = "AdministratorHome", id = UrlParameter.Optional }
+          );
 
+            
 
 
 

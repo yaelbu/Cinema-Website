@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,9 +10,10 @@ namespace Cinema_WebSite.Models
 {
     public class MovieNew
     {
-        //[ForeignKey]
-        //public int index { get; set; }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        
         [Required]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "Title must be between 2 and 30 characters")]
         public string Title { get; set; }
@@ -32,7 +34,7 @@ namespace Cinema_WebSite.Models
         public string Limitation_Age { get; set; }
 
         [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime Date { get; set; }
 
         [Required]
@@ -41,12 +43,8 @@ namespace Cinema_WebSite.Models
         [Required]
         public int EndHourMovie { get; set; }
 
-
-
-
         [Required]
         public String Hall { get; set; }
-
 
 
     }

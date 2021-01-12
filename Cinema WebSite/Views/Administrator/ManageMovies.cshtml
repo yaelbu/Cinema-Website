@@ -1,56 +1,163 @@
 ﻿@model Cinema_WebSite.ModelView.CineViewModel
 @using Cinema_WebSite.Models
 @{
-    Layout = null;
+    ViewBag.Title = "ManageMovies";
+
 }
 
-<!DOCTYPE html>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
+
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ManageMovies</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Index</title>
     <style>
-
-        img {
-            float: left;
+       
+        .ui-datepicker-trigger {
+            float:inherit;
+            glyph-orientation-vertical:auto; 
         }
 
-        tab {
-            float: right;
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
         }
-
-
     </style>
+
 </head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
 <body>
-    <div>
-        <a>@Html.ActionLink("Add Movies", "AddMovies", "Administrator")</a>
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+    @section scripts{
+
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script>
+            $(function () {
+                $(".datepicker").datepicker({
+                    //showOn: 'both',
+                    dateFormat: "dd/mm/yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "2021:2023",
+                });
+            });
+
+        </script>
+    }
+
+
+
+
+    <div style="background-color:grey">
+        <h1 style="text-align:left">Add a Movie</h1>
+        @using (Html.BeginForm("Savee", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+    <div style="margin-left: 20px">
+
+
 
         <br />
+        <i>Title :</i>
+        @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
+        <br />
 
-        @foreach (MovieNew x in Model.MVMovies)
-        {
 
-            using (Html.BeginForm("Delete", "Administrator", new { id = x.Title }))
+
+        <i>Age Limitation :</i>
+        @Html.DropDownListFor(x => x.MVMovie.Limitation_Age, new List<SelectListItem>
             {
-                <p>
-                    <tr>
-                        <td><img src="@Url.Content(x.ImagePath)" height="100" width="100" /></td>
-                        <td>@x.Title</td>
-                        
-                        <td>
-                            @Html.ActionLink("Edit", "AddMovies", "Administrator") |
-                            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete record with ID = @x.Title');" />
-                        </td>
-                    </tr>
-                    <br /><br /><br /><br /><br /><br />
-                </p>
-            }
+            new SelectListItem{Text="G - General Audiences", Value="1"},
+            new SelectListItem{Text="18 - Adults only", Value="2"},
+            new SelectListItem{Text="16 - Over 16 years", Value="3"},
+            new SelectListItem{Text="12 - Over 12 yers", Value="4"},
 
+            })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Limitation_Age, "", new { @class = "error" })
+        <br />
+
+        <i>Price :</i>
+        @Html.TextBoxFor(x => x.MVMovie.Price, new { placeholder = "Price", @class = "input-box", @id = "Text1", @type = "text" })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Price, "", new { @class = "error" })
+        <br />
+
+        <i>Date :</i>
+        @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+        <br />
+
+        <i>Category : </i>
+        @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "Select Category")
+        <br /><br />
+
+        <i> Movie Hour : </i>
+        @Html.DropDownListFor(model => model.MVMovie.BeginHourMovie, Enumerable.Range(7, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<span> to </span>@Html.DropDownListFor(model => model.MVMovie.EndHourMovie, Enumerable.Range(9, 14).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+        <br /><br />
+
+        <i>Hall1 :</i>
+        @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "Hall")
+        <br />
+
+
+     
+        <i> Poster :</i>
+        @Html.LabelFor(x => x.MVMovie.ImagePath, new { placeholder = "ImagePath", @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="file" name="file" />
+        </div>
+
+        <br />
+        <input id="submit1" type="submit" class="sign-btn" value="Save">
+        <hr />
+    </div>
+        }
+    </div>
+    
+
+
+
+    <br />
+
+    @foreach (MovieNew x in Model.MVMovies)
+    {
+
+        using (Html.BeginForm("Delete", "Administrator", new { id = x.Id }))
+        {
+            <p>
+                <tr>
+                    <td><img src="@Url.Content(x.ImagePath)" height="100" width="100" /></td>
+                    <td>@x.Title</td>
+
+                    <td>
+                        @Html.ActionLink("Update", "UpdateMovie", "Administrator", new { id = x.Id }) |
+                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete record with ID = @x.Id');" />
+                    </td>
+                </tr>
+                <br /><br /><br /><br /><br /><br />
+            </p>
         }
 
-
+    }
     </div>
+
+
 </body>
 </html>

@@ -1,17 +1,88 @@
-﻿
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
 @{
-    Layout = null;
+    ViewBag.Title = "ManageHalls";
+
 }
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ManageHalls</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Index</title>
+    <style>
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+        div1 {
+            background-color: red;
+        }
+    </style>
+
 </head>
+
+
+
+
+
+
+
+
+
 <body>
-    <div> 
+
+    <div id="div1">
+        <h1 style="text-align:left">Add a Hall</h1>
+        @using (Html.BeginForm("SaveHall", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <br />
+            <i>Hall Name :</i>
+            @Html.TextBoxFor(x => x.MVHall.Hall_Name, new { placeholder = "Hall name", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVHall.Hall_Name, "", new { @class = "error" })
+            <br />
+            
+            <i>Capacity :</i>
+            @Html.TextBoxFor(x => x.MVHall.Capacity, new { placeholder = "Hall Capacity", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVHall.Capacity, "", new { @class = "error" })
+            <br />
+
+
+
+            <input id="submit1" type="submit" class="sign-btn" value="Save">
+            <hr />
+        }
     </div>
+
+
+    @foreach(Hall hall in Model.MVHalls)
+    {
+        using(Html.BeginForm("Delete","Administrator",new { id=hall.Hall_Name}))
+        {
+        <tr>
+            <td>@hall.Hall_Name</td>
+            <td>@hall.Capacity</td>
+            <td>
+                @Html.ActionLink("Update", "UpdateHalls", "Administrator", new { id = hall.Hall_Name }) |
+                <input type="submit" value="Delete Hall" onclick="return confirm('Are you sure you want to delete record with ID = @hall.Hall_Name');" />
+            </td>
+        </tr>
+        }
+
+
+    }
 </body>
 </html>

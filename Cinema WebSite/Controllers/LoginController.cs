@@ -88,7 +88,8 @@ namespace Cinema_WebSite.Controllers
                         if (list_users1.First().Status == "Admin")
                         {
                             Session["Username"] = list_users1.First().Email;
-                            return RedirectToRoute("AdministratorHome", user);
+                        return RedirectToRoute("AdministratorHome", user);
+                        //return RedirectToRoute("MenuAdministrator", user);
                         }
                         else if (list_users1.First().Status == "Client")
                         {

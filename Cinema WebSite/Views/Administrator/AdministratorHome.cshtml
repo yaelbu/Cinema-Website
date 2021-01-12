@@ -1,8 +1,5 @@
-﻿@model Cinema_WebSite.ModelView.CineViewModel
-@using Cinema_WebSite.Models
-
+﻿
 @{
-    ViewBag.Title = "AdministratorHome";
     Layout = null;
 }
 
@@ -13,111 +10,66 @@
     <meta name="viewport" content="width=device-width" />
     <title>AdministratorHome</title>
     <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            padding: 20px 5px;
+            color: white;
+        }
+
         body {
-            background-image: url('https://www.telegramdownload.com/wp-content/uploads/2015/12/telegram-messenger-admins.jpg');
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background-size: cover;
-            background-position: center;
-        }
-
-
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
             font-family: Arial;
-            opacity: .8;
-            text-align: center;
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
         }
 
-            /* Links inside the navbar */
-            .navbar a {
-                float: left;
-                font-size: 20px;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-        /* The dropdown container */
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-
-            /* Dropdown button */
-            .dropdown .dropbtn {
-                font-size: 20px;
-                border: none;
-                outline: none;
-                color: white;
-                padding: 14px 16px;
-                background-color: inherit;
-                font-family: inherit; /* Important for vertical align on mobile phones */
-                margin: 0; /* Important for vertical align on mobile phones */
-            }
-
-            /* Add a red background color to navbar links on hover */
-            .navbar a:hover, .dropdown:hover .dropbtn {
-                background-color: red;
-            }
-
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
+        ul {
+            top: 50px;
             position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            width: 100%;
+        }
+
+        img {
+            width: 40px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        nav {
+            background-color: rgba(16,16,16,.5);
+            width: 350px;
+            height: 100%;
+            position: absolute;
+            left: -350px;
+            transition: all .5s;
+        }
+
+        input[type="checkbox"]:checked ~ nav {
+            transform: translateX(350px);
+        }
+
+        a:hover {
+            background-color: rgba(176,224,230);
+            color: black;
+        }
+
+        label {
+            padding: 15px;
+            position: absolute;
             z-index: 1;
         }
-
-            /* Links inside the dropdown */
-            .dropdown-content a {
-                float: none;
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-                text-align: left;
-                font-size: 16px;
-            }
-
-                /* Add a grey background color to dropdown links on hover */
-                .dropdown-content a:hover {
-                    background-color: #ddd;
-                }
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-
-        
-        .container {
-            height: 200px;
-            position: relative;
-            border: 3px solid green;
-        }
-
-        .center {
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-
-
     </style>
-
-
-
 </head>
+
+
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
@@ -125,29 +77,21 @@
 
 
 
-
-
-
-
 <body>
-    <div>
+    <input type="checkbox" id="chec">
+    <label for="chec">
+        <img src="~/images/risco_menu.png" />
+    </label>
 
-        <div class="center">
-            @using (Html.BeginForm("ManageMovies", "Administrator", FormMethod.Get))
-            {
-                <button>Manage Movies</button>
-            }
-            <br />
 
-            @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Get))
-            {
-                <button>Manage Halls</button>
-            }
+    <nav>
+        <ul>
+            <li><a href="@Url.Action("ManageMovies","Administrator")">MANAGE MOVIES</a></li>
+            <li><a href="@Url.Action("ManageHalls","Administrator")">MANAGE HALLS</a></li>
+            <li><a href="@Url.Action("ManagePrices","Administrator")">MANAGE PRICES</a></li>
 
-        </div>
-            </div>
 
-           
+        </ul>
+    </nav>
 </body>
 </html>
-

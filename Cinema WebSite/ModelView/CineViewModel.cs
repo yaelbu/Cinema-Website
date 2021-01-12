@@ -15,6 +15,10 @@ namespace Cinema_WebSite.ModelView
 
         public List<User> MVUsers { get; set; }
 
+        public Hall MVHall { get; set; }
+
+        public List<Hall> MVHalls { get; set; }
+
 
     }
 }
