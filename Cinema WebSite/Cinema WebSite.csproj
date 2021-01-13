@@ -300,13 +300,14 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Dat\HallData.cs" />
     <Compile Include="Dat\MovieData.cs" />
+    <Compile Include="Dat\SeatData.cs" />
     <Compile Include="Dat\UserData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Hall.cs" />
-    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MovieNew.cs" />
+    <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ModelView\CineViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -488,16 +489,15 @@
     <Content Include="Views\Client\ClientHome.cshtml" />
     <Content Include="Views\Administrator\Print.cshtml" />
     <Content Include="Views\Administrator\AddMovies.cshtml" />
-    <Content Include="Views\Administrator\DeleteMovies.cshtml" />
     <Content Include="Views\Administrator\ManageMovies.cshtml" />
-    <Content Include="Views\Administrator\Test.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Administrator\UpdateMovie.cshtml" />
     <Content Include="Views\Administrator\UpdateHall.cshtml" />
     <Content Include="Views\Administrator\ManageHalls.cshtml" />
     <Content Include="Views\Administrator\ManagePrices.cshtml" />
     <Content Include="Views\Administrator\AdministratorHome.cshtml" />
+    <Content Include="Views\Administrator\DetailsMovie.cshtml" />
+    <Content Include="Views\Administrator\UpdateMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -32,11 +32,10 @@ namespace Cinema_WebSite.Controllers
             return View();
         }
 
+
+
         public ActionResult ManageMovies()
-            {
-
-            
-
+        { 
             MovieData movdat = new MovieData();
           //  ViewBag.HallNames = new SelectList(halldat.HallsData, "Hall_Name");
             List<MovieNew> objMovies = movdat.MoviesData.ToList<MovieNew>();
@@ -44,7 +43,7 @@ namespace Cinema_WebSite.Controllers
             cvm.MVMovie = new MovieNew();
             cvm.MVMovies = objMovies;
             return View(cvm);
-            }
+        }
 
         public ActionResult ManageHalls()
         {
@@ -57,97 +56,11 @@ namespace Cinema_WebSite.Controllers
         }
   
 
-        /*
-
-        public ActionResult submit1()
-                {
-                    MovieData movdat = new MovieData();
-                    CineViewModel cvm = new CineViewModel();
-                    cvm.MVMovie = new MovieNew();
-
-                    cvm.MVMovie.Title = Request.Form["MVMovie.Title"].ToString();
-                    cvm.MVMovie.ImagePath = Request.Form["MVMovie.ImagePath"].ToString();
-                    cvm.MVMovie.Category = Request.Form["MVMovie.Category"].ToString();
-                    cvm.MVMovie.Limitation_Age = Request.Form["MVMovie.Limitation_Age"].ToString();
-                    cvm.MVMovie.Date = Convert.ToDateTime(Request.Form["MVMovie.Date"]);
-                    //cvm.MVMovie.Date = DateTime.Now;
-                    cvm.MVMovie.Hall = Request.Form["MVMovie.Hall"].ToString();
-
-            
-
-                    List<MovieNew> co1 = (from d in movdat.MoviesData where (d.Date == cvm.MVMovie.Date) && (d.Hall.Contains(cvm.MVMovie.Hall)) select d).ToList();//check if there is already a movie on the same date, in the same hall
-
-                    if (co1.Count > 0)
-                    {
-                        ModelState.AddModelError("cvm.MVMovie.Date", "There is already a movie at the same time, in the same hall");
-                    }
-
-
-                    List<MovieNew> co2 =//all the movies that are in the same date, on the same hour in the same hall
-                        (from d in movdat.MoviesData
-                         where
-        (d.Date == cvm.MVMovie.Date)
-        && ((d.BeginHourMovie == cvm.MVMovie.BeginHourMovie && (d.EndHourMovie == cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
-        || (d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
-        || (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie < cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
-        || ((d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.BeginHourMovie) && d.EndHourMovie < cvm.MVMovie.EndHourMovie && d.Hall == cvm.MVMovie.Hall)
-        || (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && cvm.MVMovie.BeginHourMovie < d.EndHourMovie && d.Hall == cvm.MVMovie.Hall)))
-                         select d).ToList<MovieNew>();
-
-
-                    if (co2.Count > 0)
-                    {
-                        ModelState.AddModelError("cvm.MVMovie.BeginHourMovie", "There is already a mvoie at this hours, in this hall");
-                    }
-
-
-
-
-
-
-
-                    List<MovieNew> co3 =//check if the movie already plays in the same day at the same hours
-                        (from d in movdat.MoviesData
-                         where
-        d.Title == cvm.MVMovie.Title && d.Date == cvm.MVMovie.Date
-        && d.Date == cvm.MVMovie.Date
-        && (
-        (d.BeginHourMovie == cvm.MVMovie.BeginHourMovie && d.EndHourMovie == cvm.MVMovie.EndHourMovie)
-        || (d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie)
-        || (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie < cvm.MVMovie.EndHourMovie)
-        || ((d.BeginHourMovie < cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.BeginHourMovie) && d.EndHourMovie < cvm.MVMovie.EndHourMovie)
-        || (d.BeginHourMovie > cvm.MVMovie.BeginHourMovie && d.EndHourMovie > cvm.MVMovie.EndHourMovie && cvm.MVMovie.BeginHourMovie < d.EndHourMovie)
-        )
-                         select d).ToList<MovieNew>();
-
-                    if (co3.Count > 0)
-                    {
-                        ModelState.AddModelError("cvm.MVMovie.Title", "The movie is already plays  at the same hours on the same day");
-                    }
-
-
-                    if (co1.Count > 0 || co2.Count > 0 || co3.Count > 0)
-                    {
-                        return View("AddMovies");
-                    }
-
-                    if (ModelState.IsValid)
-                    {
-                        movdat.MoviesData.Add(cvm.MVMovie);
-                        movdat.SaveChanges();
-                        cvm.MVMovie = new MovieNew();
-                        return View("AdministratorHome");
-                    }
-
-                    return View("ManageMovies", cvm);
-                }
-
-        */
  
 
 
          [HttpPost]
-         public ActionResult Delete(int id)
+         public ActionResult DeleteMovie(int id)
                 {
                     MovieData movdat = new MovieData();
                     CineViewModel cvm = new CineViewModel();
@@ -159,18 +72,100 @@ namespace Cinema_WebSite.Controllers
                     return View("ManageMovies", cvm);
                 }
 
-
-
-     
-
-
         public ActionResult UpdateMovie(int id)
         {
             MovieData movdat = new MovieData();
             CineViewModel cvm = new CineViewModel();
-            MovieNew mov = movdat.MoviesData.Find(id);
-            return View();
+            MovieNew mov = movdat.MoviesData.Where(x=>x.Id==id).FirstOrDefault();
+            cvm.MVMovie = mov;
+            movdat.Dispose();
+            return View(cvm);
         }
+
+
+
+        public ActionResult SaveUpdateMovie(CineViewModel movie)
+        {
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+            MovieNew mov = movdat.MoviesData.Where(x => x.Id == movie.MVMovie.Id).FirstOrDefault();
+
+            mov.Category = movie.MVMovie.Category;
+            mov.Date = movie.MVMovie.Date;
+            mov.Title = movie.MVMovie.Title;
+            mov.Limitation_Age = movie.MVMovie.Limitation_Age;
+            mov.Hall = movie.MVMovie.Hall;
+           // mov.ImagePath = movie.MVMovie.ImagePath;
+            mov.BeginHourMovie = movie.MVMovie.BeginHourMovie;
+            mov.EndHourMovie = movie.MVMovie.EndHourMovie;
+            
+            
+
+            movdat.SaveChanges();
+
+            //movdat.Dispose();
+
+            cvm.MVMovie = new MovieNew();
+            cvm.MVMovies = movdat.MoviesData.ToList<MovieNew>();
+            return View("ManageMovies", cvm);
+            //return View("ManageMovies");
+        }
+
+
+
+
+        public ActionResult BackManageMovies()
+        {
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+
+            cvm.MVMovie = new MovieNew();
+            cvm.MVMovies = movdat.MoviesData.ToList<MovieNew>();
+            return View("ManageMovies", cvm);
+            
+        }
+
+
+
+        [HttpPost]
+        public ActionResult DeleteHall(int id)
+        {
+            HallData halldat = new HallData();
+            SeatData seatdat = new SeatData();
+            CineViewModel cvm = new CineViewModel();
+            Hall hall = halldat.HallsData.Find(id);
+            Seats objSeat = new Seats();
+
+            String hallName = hall.Hall_Name;
+
+
+            List<Seats> seat1 = (from d in seatdat.SeatsData where (d.Hall_Name.Contains(hall.Hall_Name)) select d).ToList();//check if there is already a hall with the same name
+
+           
+
+
+            halldat.HallsData.Remove(hall);
+            halldat.SaveChanges();
+            cvm.MVHall = new Hall();
+            cvm.MVHalls = halldat.HallsData.ToList<Hall>();
+
+
+            
+            //for (int i = 1; i <= seat1.Count; i++)
+            //{
+             //   seatdat.SeatsData.Remove(objSeat);
+              //  seatdat.SaveChanges();
+            //}
+
+
+
+
+            return View("ManageHalls", cvm);
+        }
+
+
+
+
 
 
 
@@ -182,12 +177,18 @@ namespace Cinema_WebSite.Controllers
         {
             CineViewModel cvm = new CineViewModel();
             Hall objHall = new Hall();
+            Seats objSeat = new Seats();
+            HallData halldat = new HallData();
+            SeatData seatdat = new SeatData();
+            
 
 
             objHall.Hall_Name = Request.Form["MVHall.Hall_Name"].ToString();
             objHall.Capacity = int.Parse(Request.Form["MVHall.Capacity"]);
+            int capacity = objHall.Capacity;
 
-            HallData halldat = new HallData();
+
+
 
             List<Hall> hall1 = (from d in halldat.HallsData where (d.Hall_Name.Contains(objHall.Hall_Name)) select d).ToList();//check if there is already a hall with the same name
             if (hall1.Count > 0)
@@ -200,6 +201,18 @@ namespace Cinema_WebSite.Controllers
 
             if (ModelState.IsValid)
             {
+                for(int i = 1; i <= capacity; i++)
+                {
+                    objSeat.Hall_Name = objHall.Hall_Name;
+                    objSeat.SeatNumber = i;
+                    objSeat.StatusSeat = "Free";
+                    seatdat.SeatsData.Add(objSeat);
+                    seatdat.SaveChanges();
+
+                }
+               
+
+
                 halldat.HallsData.Add(objHall);
                 halldat.SaveChanges();
                 cvm.MVHall = new Hall();
@@ -215,6 +228,10 @@ namespace Cinema_WebSite.Controllers
 
         }
 
+
+
+
+
         [HttpPost]
          public ActionResult Savee(HttpPostedFileBase file)
          {
@@ -225,7 +242,9 @@ namespace Cinema_WebSite.Controllers
             objMovie.Title = Request.Form["MVMovie.Title"].ToString();
             objMovie.Category = Request.Form["MVMovie.Category"].ToString();
             objMovie.Limitation_Age = Request.Form["MVMovie.Limitation_Age"].ToString();
-            objMovie.Price = int.Parse(Request.Form["MVMovie.Price"]);
+            //objMovie.Price = int.Parse(Request.Form["MVMovie.Price"]);
+            objMovie.Price = 40;
+
             objMovie.Date = Convert.ToDateTime(Request.Form["MVMovie.Date"]);
             objMovie.Hall = Request.Form["MVMovie.Hall"].ToString();
             objMovie.BeginHourMovie = int.Parse(Request.Form["MVMovie.BeginHourMovie"]);
@@ -291,7 +310,7 @@ d.Title == objMovie.Title && d.Date == objMovie.Date
 
             if (co1.Count > 0 || co2.Count > 0 || co3.Count > 0)
             {
-                return View("AddMovies");
+                return View("ManageMovies");
             }
 
             if (ModelState.IsValid)
@@ -310,6 +329,60 @@ d.Title == objMovie.Title && d.Date == objMovie.Date
 
         }
 
+        [HttpPost]
+        public ActionResult SavePrice()
+        {
+            CineViewModel cvm = new CineViewModel();
+            MovieNew objMovie = new MovieNew();
+
+            MovieData movdat = new MovieData();
+
+            objMovie.Title = Request.Form["MVMovie.Title"].ToString();
+            objMovie.Price = int.Parse(Request.Form["MVMovie.Price"]);
+
+            List<MovieNew> co1 = (from d in movdat.MoviesData where (d.Title == objMovie.Title) select d).ToList();//check if there is already a movie on the same date, in the same hall
+
+
+            if(co1.Count==0)
+            {
+                ModelState.AddModelError("MVMovie.Title", "It doesn't exist a movie with this title");
+                return View("ManagePrices");
+            }
+
+
+            List<MovieNew> co2 = (from d in movdat.MoviesData where (d.Title == objMovie.Title) && (d.Price==objMovie.Price) select d).ToList();//check if there is already a movie on the same date, in the same hall
+
+            if (co2.Count>0)
+            {
+                ModelState.AddModelError("MVMovie.Title", "Already exists a movie with this price");
+                return View("ManagePrices");
+            }
+
+            List<MovieNew> co3 = (from d in movdat.MoviesData where (d.Title == objMovie.Title) && (d.Price != objMovie.Price) select d).ToList();//check if there is already a movie on the same date, in the same hall
             
+           // List<MovieNew> mov = movdat.MoviesData.Where(x => x.Title == objMovie.Title).All();
+            //cvm.MVMovie = mov;
+            movdat.Dispose();
+            return View(cvm);
+
+
+            if (ModelState.IsValid && co3.Count==1)
+            {
+                movdat.MoviesData.Add(objMovie);
+                movdat.SaveChanges();
+                cvm.MVMovie = new MovieNew();
+            }
+            else
+                cvm.MVMovie = objMovie;
+
+            cvm.MVMovies = movdat.MoviesData.ToList<MovieNew>();
+            return View("ManagePrices", cvm);
+
+
+
+            return View();
+
+        }
+
     }
 }
