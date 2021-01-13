@@ -12,12 +12,12 @@ namespace Cinema_WebSite.Dat
     public class MovieData : DbContext
     {
 
-        public DbSet<MovieNew> MoviesData { get; set; }
+        public DbSet<Movie> MoviesData { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MovieNew>().ToTable("MoviesFinal");
+            modelBuilder.Entity<Movie>().ToTable("MoviesFinal");
         }
     }
 }

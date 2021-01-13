@@ -28,6 +28,24 @@
             background: url('/images/background_cine.jpg');
             background-size: 100%;
         }
+        th, td {
+            border: 1px solid black;
+            margin-left:10px;
+            text-align:center;
+            
+        }
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size:12px;
+        }
+  
     </style>
 
 </head>
@@ -67,10 +85,13 @@
 
 
 
-    <div style="background-color:grey">
+    <div style=" background-color: rgba(201, 150, 115, 0.8);    border-color: black;        border-style: solid;        width: 98%;        margin-left: auto;        margin-right: auto;">
         <h1 style="text-align:left">Add a Movie</h1>
         @using (Html.BeginForm("Savee", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
+            @Html.AntiForgeryToken()
+
+
     <div style="margin-left: 20px">
 
 
@@ -85,13 +106,13 @@
 
         <i>Age Limitation :</i>
         @Html.DropDownListFor(x => x.MVMovie.Limitation_Age, new List<SelectListItem>
-            {
-            new SelectListItem{Text="G - General Audiences", Value="1"},
-            new SelectListItem{Text="18 - Adults only", Value="2"},
-            new SelectListItem{Text="16 - Over 16 years", Value="3"},
-            new SelectListItem{Text="12 - Over 12 yers", Value="4"},
+    {
+    new SelectListItem{Text="G - General Audiences", Value="G - General Audiences"},
+    new SelectListItem{Text="18 - Adults only", Value="18 - Adults only"},
+    new SelectListItem{Text="16 - Over 16 years", Value="16 - Over 16 years"},
+    new SelectListItem{Text="12 - Over 12 years", Value="12 - Over 12 years"},
 
-            })
+    }, "-- Select Limit Age --")
         <br />@Html.ValidationMessageFor(x => x.MVMovie.Limitation_Age, "", new { @class = "error" })
         <br />
 
@@ -99,70 +120,107 @@
 
         <i>Date projection :</i>
         @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Date, "", new { @class = "error" })
         <br />
 
         <i>Category : </i>
-        @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "Select Category")
+        @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-- Select Category --")
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
         <br /><br />
 
         <i> Movie Hour : </i>
-        @Html.DropDownListFor(model => model.MVMovie.BeginHourMovie, Enumerable.Range(7, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<span> to </span>@Html.DropDownListFor(model => model.MVMovie.EndHourMovie, Enumerable.Range(9, 14).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+        @Html.DropDownListFor(model => model.MVMovie.BeginHourMovie, Enumerable.Range(7, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "-- Begin --")<span> to </span>@Html.DropDownListFor(model => model.MVMovie.EndHourMovie, Enumerable.Range(9, 14).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "-- End --")
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.BeginHourMovie, "", new { @class = "error" })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.EndHourMovie, "", new { @class = "error" })
+
         <br /><br />
 
-        <i>Hall :</i>
-        @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "Hall")
+
+
+        <i>Hall</i>
+        @Html.DropDownListFor(x => x.MVMovie.Hall, (SelectList)ViewBag.Hallid,"--Select Hall--","Hall_Name")
+
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Hall, "", new { @class = "error" })
+
+
         <br />
 
 
-     
+
         <i> Poster :</i>
         @Html.LabelFor(x => x.MVMovie.ImagePath, new { placeholder = "ImagePath" })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.ImagePath, "", new { @class = "error" })
+
         <div>
             <input type="file" id="file" name="file" />
         </div>
-        <br/>
-        Price by default 40
+        <br />
+        <div style="font-size:10px">Price by default 40</div>
 
         <br />
-        <input id="submit1" type="submit" class="sign-btn" value="Save">
-        <hr />
+        <input id="submit1" type="submit" class="sign-btn" value="Save" style="margin-bottom: 10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
     </div>
         }
     </div>
-    
-
 
 
     <br />
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Limitation Age</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Movie Hours</th>
+            <th>Hall</th>
+            <th>Poster</th>
+            <th></th>
+        </tr>
+        @foreach (Movie x in Model.MVMovies)
+        {
 
-    @foreach (MovieNew x in Model.MVMovies)
+
+
+    <tr>
+        <td>@x.Title</td>
+        <td>@x.Category</td>
+        <td>@x.Limitation_Age</td>
+        <td>@x.Price</td>
+        <td>@x.Date</td>
+        <td>@x.BeginHourMovie - @x.EndHourMovie</td>
+        <td>@x.Hall</td>
+        <td style="margin-top:15px"><img src="@Url.Content(x.ImagePath)" height="90" width="90" /></td>
+
+
+        <td style="background-color:transparent">
+
+            @using (Html.BeginForm("DeleteMovie", "Administrator", new { id = x.Id }))
+            {
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete record with ID = @x.Id');" />
+            }
+            @using (Html.BeginForm("UpdateMovie", "Administrator", new { id = x.Id }))
+            {
+                <input type="submit" value="Update" />
+            }
+            @using (Html.BeginForm("DetailsMovie", "Administrator", new { id = x.Id }))
+            {
+                <input type="submit" value="Detail" />
+            }
+        </td>
+
+    </tr>
+
+
+        }
+    </table>
+    @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
     {
-
-       
-            <p>
-                <tr>
-                    <td><img src="@Url.Content(x.ImagePath)" height="100" width="100" /></td>
-                    <td>@x.Title</td>
-
-                    <td>
-                        @using (Html.BeginForm("DeleteMovie", "Administrator", new { id = x.Id }))
-                        {
-                            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete record with ID = @x.Id');" />
-                        }
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("UpdateMovie", "Administrator", new { id = x.Id }))
-                        {
-                            <input type="submit" value="Update" />
-                        }
-                    </td>
-                </tr>
-                <br /><br /><br /><br /><br /><br />
-            </p>
-        
-
+        <input id="Submit1" type="submit" value="Log out" />
     }
-    </div>
 
 
 </body>

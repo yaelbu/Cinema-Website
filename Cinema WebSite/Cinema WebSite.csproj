@@ -306,7 +306,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Hall.cs" />
-    <Compile Include="Models\MovieNew.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ModelView\CineViewModel.cs" />
@@ -498,6 +498,7 @@
     <Content Include="Views\Administrator\AdministratorHome.cshtml" />
     <Content Include="Views\Administrator\DetailsMovie.cshtml" />
     <Content Include="Views\Administrator\UpdateMovie.cshtml" />
+    <Content Include="Views\Administrator\DetailsHall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

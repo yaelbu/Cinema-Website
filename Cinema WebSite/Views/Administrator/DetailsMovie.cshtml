@@ -5,40 +5,87 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Index</title>
+    <style>
+
+    
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+    </style>
 
 </head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 <body>
     <div>
 
-        <dl class="dl-horizontal">
+        <dl  style="align-items:normal;">
             <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Title)
+                @Html.DisplayNameFor(x => x.MVMovie.Title) : @Html.DisplayFor(x => x.MVMovie.Title)
+
+
             </dt>
             <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Hall)
+                @Html.DisplayNameFor(x => x.MVMovie.Hall): @Html.DisplayFor(x => x.MVMovie.Hall)
             </dt>
             <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Limitation_Age)
+                @Html.DisplayNameFor(x => x.MVMovie.Limitation_Age) : @Html.DisplayFor(x => x.MVMovie.Limitation_Age)
             </dt>
             <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Category)
+                @Html.DisplayNameFor(x => x.MVMovie.Category) : @Html.DisplayFor(x => x.MVMovie.Category)
             </dt>
             <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Price)
+                @Html.DisplayNameFor(x => x.MVMovie.Price) : @Html.DisplayFor(x => x.MVMovie.Price)
             </dt>
 
+            <dt>
+                @Html.DisplayNameFor(x => x.MVMovie.Date) : @Html.DisplayFor(x => x.MVMovie.Date)
+            </dt>
+
+            <dt>
+                @Html.DisplayNameFor(x => x.MVMovie.BeginHourMovie) : @Html.DisplayFor(x => x.MVMovie.BeginHourMovie)
+            </dt>
+
+            <dt>
+                @Html.DisplayNameFor(x => x.MVMovie.EndHourMovie) : @Html.DisplayFor(x => x.MVMovie.EndHourMovie)
+            </dt>
+
+
+
+            <dt>
+                @Html.DisplayNameFor(x => x.MVMovie.ImagePath) : <img src="@Url.Content(Model.MVMovie.ImagePath)" height="100" width="100" />
+            </dt>
 
         </dl>
 
 
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit") |
-        @Html.ActionLink("Back to List", "ManageMovies")
-    </p>
+    <div style="margin-top:400px; margin-left:40px">
+
+        @Html.ActionLink("Back to Manage Movies", "BackManageMovies")
+    </div>
+
+
+
 
 </body>
 
+</html>

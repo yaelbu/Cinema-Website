@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Cinema_WebSite.Models
 {
-    public class MovieNew
+    public class Movie
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

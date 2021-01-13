@@ -56,53 +56,52 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.MVMovie.Id)
 
+        <div>
+            <i>Title :</i>
+            @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
+            <br />
+
+
+            <i>Age Limitation :</i>
+            @Html.DropDownListFor(x => x.MVMovie.Limitation_Age, new List<SelectListItem>
+        {
+        new SelectListItem{Text="G - General Audiences", Value="G - General Audiences"},
+        new SelectListItem{Text="18 - Adults only", Value="18 - Adults only"},
+        new SelectListItem{Text="16 - Over 16 years", Value="16 - Over 16 years"},
+        new SelectListItem{Text="12 - Over 12 years", Value="12 - Over 12 years"},
+
+        }, "-- Select Limit Age --")
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Limitation_Age, "", new { @class = "error" })
+            <br />
+
+
+            <i>Date projection :</i>
+            @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+            <br />
+
+            <i>Category : </i>
+            @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "Select Category")
+            <br /><br />
+
+            <i> Movie Hour : </i>
+            @Html.DropDownListFor(model => model.MVMovie.BeginHourMovie, Enumerable.Range(7, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<span> to </span>@Html.DropDownListFor(model => model.MVMovie.EndHourMovie, Enumerable.Range(9, 14).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+            <br /><br />
+
+            <i>Hall :</i>
+            @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "Hall")
+            <br />
+
+
+
+            <i> Poster :</i>
+            @Html.LabelFor(x => x.MVMovie.ImagePath, new { placeholder = "ImagePath" })
             <div>
-                <i>Title :</i>
-                @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
-                <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
-                <br />
-
-
-
-                <i>Age Limitation :</i>
-                @Html.DropDownListFor(x => x.MVMovie.Limitation_Age, new List<SelectListItem>
-                    {
-                    new SelectListItem{Text="G - General Audiences", Value="1"},
-                    new SelectListItem{Text="18 - Adults only", Value="2"},
-                    new SelectListItem{Text="16 - Over 16 years", Value="3"},
-                    new SelectListItem{Text="12 - Over 12 yers", Value="4"},
-
-                    })
-                <br />@Html.ValidationMessageFor(x => x.MVMovie.Limitation_Age, "", new { @class = "error" })
-                <br />
-
-
-                <i>Date projection :</i>
-                @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
-                <br />
-
-                <i>Category : </i>
-                @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "Select Category")
-                <br /><br />
-
-                <i> Movie Hour : </i>
-                @Html.DropDownListFor(model => model.MVMovie.BeginHourMovie, Enumerable.Range(7, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<span> to </span>@Html.DropDownListFor(model => model.MVMovie.EndHourMovie, Enumerable.Range(9, 14).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-                <br /><br />
-
-                <i>Hall :</i>
-                @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "Hall")
-                <br />
-
-
-
-                <i> Poster :</i>
-                @Html.LabelFor(x => x.MVMovie.ImagePath, new { placeholder = "ImagePath" })
-                <div>
-                    <input type="file" id="file" name="file" />
-                </div>
-                <br />
-
+                <input type="file" id="file" name="file" />
             </div>
+            <br />
+
+        </div>
         </div>
         <input id="submit1" type="submit" class="sign-btn" value="Save Changement">
 
