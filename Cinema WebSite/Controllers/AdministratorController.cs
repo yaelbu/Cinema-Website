@@ -22,7 +22,7 @@ namespace Cinema_WebSite.Controllers
         }
 
 
-        public ActionResult AdministratorHome()
+        public ActionResult AdministratorHome(User user)
         {
             return View();
         }
@@ -185,18 +185,6 @@ namespace Cinema_WebSite.Controllers
 
 
  
-
-
-
-
-
-
-
-
-
-
-
-
 
         public ActionResult BackManageHalls()
         {
@@ -523,62 +511,4 @@ namespace Cinema_WebSite.Controllers
     }
 }
 
-
-/*
  
- Dans ManageMobie : 
-  <i>Hall :</i>
-        @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "-- Select Hall --")
-        <br />@Html.ValidationMessageFor(x => x.MVMovie.Hall, "", new { @class = "error" })
-
-        <br />
-        
-
-
-
-
-
-
-
-
-
-       <i>Hall</i>
-        @Html.DropDownListFor(x => x.MVMovie.Hall, (SelectList)ViewBag.Hallid,"--Select Hall--", new { @class="form-control"})
-
-        
-
-        <br />@Html.ValidationMessageFor(x => x.MVMovie.Hall, "", new { @class = "error" })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   <i>Hall :</i>
-        @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "-- Select Hall --")
-        <br />@Html.ValidationMessageFor(x => x.MVMovie.Hall, "", new { @class = "error" })
-
-        <br />
-        
-
-        IICIIIII
-        <div class="form-group">
-            @Html.LabelFor(x => x.MVMovie.Hall, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div>
-                
-                @Html.DropDownList("Hallid", null, htmlAttributes: new { @class = "form-control" })
-                <br />@Html.ValidationMessageFor(x => x.MVMovie.Hall, "", new { @class = "error" })
-            </div>
-        </div>
-        <br />
-
- 
- */

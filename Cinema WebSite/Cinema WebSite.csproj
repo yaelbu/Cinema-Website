@@ -305,6 +305,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterType.cs" />
     <Compile Include="Models\Hall.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Seats.cs" />
@@ -486,7 +487,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Login\HomeLogin.cshtml" />
-    <Content Include="Views\Client\ClientHome.cshtml" />
     <Content Include="Views\Administrator\Print.cshtml" />
     <Content Include="Views\Administrator\AddMovies.cshtml" />
     <Content Include="Views\Administrator\ManageMovies.cshtml" />
@@ -499,6 +499,7 @@
     <Content Include="Views\Administrator\DetailsMovie.cshtml" />
     <Content Include="Views\Administrator\UpdateMovie.cshtml" />
     <Content Include="Views\Administrator\DetailsHall.cshtml" />
+    <Content Include="Views\Client\ClientHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

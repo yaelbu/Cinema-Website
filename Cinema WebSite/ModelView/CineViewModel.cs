@@ -19,6 +19,8 @@ namespace Cinema_WebSite.ModelView
 
         public List<Hall> MVHalls { get; set; }
 
+        public FilterType MVFilterType { get; set; }
+
 
     }
 }

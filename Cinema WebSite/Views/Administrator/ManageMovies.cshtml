@@ -70,12 +70,17 @@
         <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
         <script>
             $(function () {
+                var dateToday = new Date();
                 $(".datepicker").datepicker({
                     //showOn: 'both',
                     dateFormat: "dd/mm/yy",
                     changeMonth: true,
                     changeYear: true,
                     yearRange: "2021:2023",
+                    showOtherMonths: true,
+                    selectOtherMonths: true,
+                    showButtonPanel: true,
+                    minDate: dateToday,
                 });
             });
 

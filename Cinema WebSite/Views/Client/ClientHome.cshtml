@@ -1,7 +1,12 @@
-﻿
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
 @{
-    Layout = null;
+    ViewBag.Title = "ClientHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
 
 <!DOCTYPE html>
 
@@ -10,8 +15,39 @@
     <meta name="viewport" content="width=device-width" />
     <title>ClientHome</title>
     <style>
-    body { background-image: url('https://www.spreadfamily.fr/wp-content/uploads/2017/08/livre-blanc-connaissance-client.jpg'); margin: 0; padding: 0; font-family: sans-serif; background-size: cover; background-position: center; }
+
+
+        .ui-datepicker-trigger {
+            float: inherit;
+            glyph-orientation-vertical: auto;
+        }
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            margin-left: 10px;
+            text-align: center;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+  
     </style>
+
 
 
 
@@ -20,6 +56,69 @@
     <div>
         <h1>Client Home !!!!!</h1>
     </div>
+    @using (Html.BeginForm("ValidFilter", "Client", FormMethod.Post))
+    {
+
+
+        <i>Filter :</i>
+        @Html.DropDownListFor(x => x.MVFilterType.filter_type, new List<SelectListItem>
+    {
+    new SelectListItem{Text="By default", Value="By default"},
+    new SelectListItem{Text="Price Increase", Value="Price Increase"},
+    new SelectListItem{Text="Price Decrease", Value="Price Decrease"},
+    new SelectListItem{Text="Category", Value="Category"},
+
+    }, "-- Select Filter --")
+        <br />@Html.ValidationMessageFor(x => x.MVFilterType.filter_type, "", new { @class = "error" })
+        <br />
+
+        <input id="Submit1" type="submit" value="Appliquer" />
+    }
+
+
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Limitation Age</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Movie Hours</th>
+            <th>Hall</th>
+            <th>Poster</th>
+            <th></th>
+        </tr>
+        @foreach (Movie x in Model.MVMovies)
+        {
+
+
+
+            <tr>
+                <td>@x.Title</td>
+                <td>@x.Category</td>
+                <td>@x.Limitation_Age</td>
+                <td>@x.Price</td>
+                <td>@x.Date</td>
+                <td>@x.BeginHourMovie - @x.EndHourMovie</td>
+                <td>@x.Hall</td>
+                <td style="margin-top:15px"><img src="@Url.Content(x.ImagePath)" height="90" width="90" /></td>
+
+
+
+
+            </tr>
+
+
+        }
+    </table>
+    @using (Html.BeginForm("Logout", "Client", FormMethod.Post))
+    {
+        <input id="Submit1" type="submit" value="Log out" />
+    }
+
+
+
 </body>
 </html>
 
