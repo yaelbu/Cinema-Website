@@ -33,32 +33,40 @@ namespace Cinema_WebSite.Controllers
 
         }
 
-        //[HttpPost]
         public ActionResult ValidFilter()
         {
 
             MovieData movdat = new MovieData();
             FilterType ft = new FilterType();
+            Movie mov = new Movie();
             CineViewModel cvm = new CineViewModel();
             cvm.MVMovie = new Movie();
+            List<Movie> objMovies_Default;
+            List<Movie> objMovies_DescendingPrices;
+            List<Movie> objMovies_IncreasingPrices;
+
             ft.filter_type = Request.Form["MVFilterType.filter_type"].ToString();
-            List<Movie> objMovies_Default = movdat.MoviesData.ToList<Movie>();
-            List<Movie> objMovies_DescendingPrices = movdat.MoviesData.OrderByDescending(x => x.Price).ToList<Movie>();
-            List<Movie> objMovies_IncreasingPrices = movdat.MoviesData.OrderBy(x => x.Price).ToList<Movie>();
-            List<Movie> objMovies_Category = movdat.MoviesData.OrderBy(x => x.Category).ToList<Movie>();
+            mov.Category= Request.Form["MVMovie.Category"].ToString();
 
+            if(mov.Category=="")
+            { 
+            objMovies_Default = movdat.MoviesData.ToList<Movie>();
+            objMovies_DescendingPrices = movdat.MoviesData.OrderByDescending(x => x.Price).ToList<Movie>();
+            objMovies_IncreasingPrices = movdat.MoviesData.OrderBy(x => x.Price).ToList<Movie>();
+            }
+            else
+            {
+                objMovies_Default = movdat.MoviesData.Where(x=>x.Category==mov.Category).ToList<Movie>();
+                objMovies_DescendingPrices = movdat.MoviesData.OrderByDescending(x => x.Price).Where(x => x.Category == mov.Category).ToList<Movie>();
+                objMovies_IncreasingPrices = movdat.MoviesData.OrderBy(x => x.Price).Where(x => x.Category == mov.Category).ToList<Movie>();
 
+            }
 
-            //ft.filter_type = Request.Form["MVFilterType.filter_type"].ToString();
 
             if (ModelState.IsValid)
             {
-                if (ft.filter_type == "By default")
-                {
-                    cvm.MVMovies = objMovies_Default;
-                    return View("ClientHome", cvm);
-                }
-                else if (ft.filter_type == "Price Increase")
+          
+                if (ft.filter_type == "Price Increase")
                 {
                     cvm.MVMovies = objMovies_IncreasingPrices;
                     return View("ClientHome", cvm);
@@ -69,17 +77,13 @@ namespace Cinema_WebSite.Controllers
                     return View("ClientHome", cvm);
                 }
 
-                else if (ft.filter_type == "Category")
-                {
-                    cvm.MVMovies = objMovies_Category;
-                    return View("ClientHome", cvm);
-                }
+                
 
             }
             //CineViewModel cvm = new CineViewModel();
             cvm.MVMovie = new Movie();
             cvm.MVMovies = objMovies_Default;
-            return View("",cvm);
+            return View("ClientHome",cvm);
         }
 
 

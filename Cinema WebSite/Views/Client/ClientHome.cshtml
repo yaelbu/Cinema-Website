@@ -63,14 +63,21 @@
         <i>Filter :</i>
         @Html.DropDownListFor(x => x.MVFilterType.filter_type, new List<SelectListItem>
     {
-    new SelectListItem{Text="By default", Value="By default"},
+ 
     new SelectListItem{Text="Price Increase", Value="Price Increase"},
     new SelectListItem{Text="Price Decrease", Value="Price Decrease"},
-    new SelectListItem{Text="Category", Value="Category"},
+    
 
     }, "-- Select Filter --")
         <br />@Html.ValidationMessageFor(x => x.MVFilterType.filter_type, "", new { @class = "error" })
         <br />
+
+
+        <i>Category : </i>
+        @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-- Select Category --")
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
+        <br /><br />
+
 
         <input id="Submit1" type="submit" value="Appliquer" />
     }
