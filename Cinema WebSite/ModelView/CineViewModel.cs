@@ -21,6 +21,13 @@ namespace Cinema_WebSite.ModelView
 
         public FilterType MVFilterType { get; set; }
 
+        public Moviee MVMoviee { get; set; }
+        public List<Moviee> MVMoviees { get; set; }
+
+        public MovieProjection MVMovieProjection { get; set; }
+
+        public List<MovieProjection> MVMoviesProjection {get; set;}
+
 
     }
 }

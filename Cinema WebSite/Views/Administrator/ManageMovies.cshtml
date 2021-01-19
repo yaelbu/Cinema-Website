@@ -123,10 +123,15 @@
 
 
 
-        <i>Date projection :</i>
-        @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+    
+
+
+        <br />
+        <i>Date Projection :</i>
+        @Html.TextBoxFor(x => x.MVMovie.Date, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
         <br />@Html.ValidationMessageFor(x => x.MVMovie.Date, "", new { @class = "error" })
         <br />
+
 
         <i>Category : </i>
         @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-- Select Category --")
@@ -143,7 +148,7 @@
 
 
         <i>Hall</i>
-        @Html.DropDownListFor(x => x.MVMovie.Hall, (SelectList)ViewBag.Hallid,"--Select Hall--","Hall_Name")
+        @Html.DropDownListFor(x => x.MVMovie.Hall, (SelectList)ViewBag.Hallid, "--Select Hall--", "Hall_Name")
 
         <br />@Html.ValidationMessageFor(x => x.MVMovie.Hall, "", new { @class = "error" })
 

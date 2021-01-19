@@ -34,7 +34,7 @@ namespace Cinema_WebSite.Models
         public string Limitation_Age { get; set; }
 
         [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime Date { get; set; }
 
         [Required]
@@ -50,7 +50,7 @@ namespace Cinema_WebSite.Models
     }
 
 
-    public enum Category
+    /*public enum Category
     {
         Action,
         Adventure,
@@ -63,6 +63,6 @@ namespace Cinema_WebSite.Models
         ScienceFiction,
         Thriller,
         Western
-    }
+    }*/
 
 }

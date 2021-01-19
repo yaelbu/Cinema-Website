@@ -300,6 +300,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Dat\HallData.cs" />
     <Compile Include="Dat\MovieData.cs" />
+    <Compile Include="Dat\MovieeData.cs" />
+    <Compile Include="Dat\MovieProjectionData.cs" />
     <Compile Include="Dat\SeatData.cs" />
     <Compile Include="Dat\UserData.cs" />
     <Compile Include="Global.asax.cs">
@@ -308,6 +310,8 @@
     <Compile Include="Models\FilterType.cs" />
     <Compile Include="Models\Hall.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Moviee.cs" />
+    <Compile Include="Models\MovieProjection.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ModelView\CineViewModel.cs" />
@@ -488,7 +492,6 @@
     <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Login\HomeLogin.cshtml" />
     <Content Include="Views\Administrator\Print.cshtml" />
-    <Content Include="Views\Administrator\AddMovies.cshtml" />
     <Content Include="Views\Administrator\ManageMovies.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -500,6 +503,8 @@
     <Content Include="Views\Administrator\UpdateMovie.cshtml" />
     <Content Include="Views\Administrator\DetailsHall.cshtml" />
     <Content Include="Views\Client\ClientHome.cshtml" />
+    <Content Include="Views\Administrator\AddMovieDetails.cshtml" />
+    <Content Include="Views\Administrator\ManageMovies2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

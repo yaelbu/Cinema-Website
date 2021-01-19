@@ -33,6 +33,20 @@ namespace Cinema_WebSite.Controllers
         }
 
 
+        public ActionResult AddMovieDetails()
+        {
+            
+            MovieeData movdat = new MovieeData();
+           // HallData halldat = new HallData();
+            List<Moviee> objMovies = movdat.MovieesData.ToList<Moviee>();
+            CineViewModel cvm = new CineViewModel();
+           // ViewBag.Hallid = new SelectList(halldat.HallsData, "Id", "Hall_Name");
+            cvm.MVMoviee = new Moviee();
+            cvm.MVMoviees = objMovies;
+            return View(cvm);
+            
+            //return View();
+        }
 
         public ActionResult ManageMovies()
         { 
@@ -45,6 +59,34 @@ namespace Cinema_WebSite.Controllers
             cvm.MVMovies = objMovies;
             return View(cvm);
         }
+
+
+
+
+
+
+
+
+        public ActionResult ManageMovies2()
+        {
+            MovieProjectionData movprojdat = new MovieProjectionData();
+            HallData halldat = new HallData();
+            MovieeData moovdat = new MovieeData();
+            List<MovieProjection> objMoviesProj = movprojdat.MoviesProjectionData.ToList<MovieProjection>();
+            CineViewModel cvm = new CineViewModel();
+            ViewBag.Titleid = new SelectList(moovdat.MovieesData, "Id", "Title");
+            ViewBag.Hallid = new SelectList(halldat.HallsData, "Id", "Hall_Name");
+            cvm.MVMovieProjection = new MovieProjection();
+            cvm.MVMoviesProjection = objMoviesProj;
+            return View(cvm);
+        }
+
+
+
+
+
+
+
 
         public ActionResult ManageHalls()
         {
@@ -431,6 +473,120 @@ namespace Cinema_WebSite.Controllers
 
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        public ActionResult Savee1(HttpPostedFileBase file)
+        {
+            CineViewModel cvm = new CineViewModel();
+            Moviee objMoviee = new Moviee();
+            MovieeData movdat = new MovieeData();
+            //HallData halldat = new HallData();
+            //ViewBag.Hallid = new SelectList(halldat.HallsData, "Id", "Hall_Name");
+
+            objMoviee.Title = Request.Form["MVMoviee.Title"].ToString();
+            objMoviee.Realisator = Request.Form["MVMoviee.Realisator"].ToString();
+            objMoviee.Category = Request.Form["MVMoviee.Category"].ToString();
+            objMoviee.LimitAge = Request.Form["MVMoviee.LimitAge"].ToString();
+            objMoviee.ReleaseDate = Convert.ToDateTime(Request.Form["MVMoviee.ReleaseDate"]);
+            objMoviee.RunningTime = Convert.ToDateTime(Request.Form["MVMoviee.RunningTime"]);
+            objMoviee.Price = int.Parse(Request.Form["MVMoviee.Price"]);
+
+            String imageName = System.IO.Path.GetFileName(file.FileName);
+            String physcialPath = Server.MapPath("~/images/" + imageName);
+            file.SaveAs(physcialPath);
+            objMoviee.Poster = "~/images/" + imageName;
+
+            List<Moviee> mov1; 
+
+            if (ModelState.IsValid)
+            {
+
+                mov1 = (from d in movdat.MovieesData where d.Title == objMoviee.Title select d).ToList();//check if there is already a movie on the same date, in the same hall
+
+                if (mov1.Count > 0)
+                {
+                    ModelState.AddModelError("x.MVMoviee.Titlee", "There is already a movie with this name");
+                    cvm.MVMoviee = new Moviee();
+                    cvm.MVMoviees = movdat.MovieesData.ToList<Moviee>();
+                    return View("AddMovieDetails", cvm);
+                }
+                movdat.MovieesData.Add(objMoviee);
+                movdat.SaveChanges();
+                cvm.MVMoviee = new Moviee();
+            }
+            else
+                cvm.MVMoviee = objMoviee;
+
+            cvm.MVMoviees = movdat.MovieesData.ToList<Moviee>();
+            return View("AddMovieDetails", cvm);
+        }
+
+
+        [HttpPost]
+        public ActionResult Savee2()
+        {
+            CineViewModel cvm = new CineViewModel();
+            MovieProjection objMoviePojection = new MovieProjection();
+            MovieProjectionData movprojdat = new MovieProjectionData();
+            HallData halldat = new HallData();
+            MovieeData movdat = new MovieeData();
+            ViewBag.Hallid = new SelectList(halldat.HallsData, "Id", "Hall_Name");
+            ViewBag.Titleid = new SelectList(movdat.MovieesData, "Id", "Title");
+
+
+            objMoviePojection.Title = Request.Form["MVMovieProjection.Title"].ToString();
+            objMoviePojection.ProjectionDate = Convert.ToDateTime(Request.Form["MVMovieProjection.ProjectionDate"]);
+            objMoviePojection.ProjectionHall = Request.Form["MVMovieProjection.ProjectionHall"].ToString();
+
+            objMoviePojection.BeginProjectionHour = Convert.ToDateTime(Request.Form["MVMovieProjection.BeginProjectionHour"]);
+
+            List<Hall> hall1 = (from d in halldat.HallsData where (d.Id).ToString() == objMoviePojection.ProjectionHall select d).ToList();
+            objMoviePojection.ProjectionHall = hall1.FirstOrDefault().Hall_Name;
+
+            List<Moviee> mov1 = (from d in movdat.MovieesData where (d.Id).ToString() == objMoviePojection.Title select d).ToList();
+            objMoviePojection.Title = mov1.FirstOrDefault().Title;
+            //List<MovieProjection> movProj1;
+
+            if (ModelState.IsValid)
+            {
+
+                movprojdat.MoviesProjectionData.Add(objMoviePojection);
+                movprojdat.SaveChanges();
+                cvm.MVMovieProjection = new MovieProjection();
+
+            }
+            else
+            {
+                cvm.MVMovieProjection = objMoviePojection;
+
+            }
+            cvm.MVMoviesProjection = movprojdat.MoviesProjectionData.ToList<MovieProjection>();
+            return View("ManageMovies2", cvm);
+
+
+
+        }
+
+
+
+
+
         [HttpPost]
         public ActionResult SavePrice()
         {
@@ -511,4 +667,26 @@ namespace Cinema_WebSite.Controllers
     }
 }
 
+
+
+
+
+/*
  
+         <i>Date projection :</i>
+        @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Date, "", new { @class = "error" })
+        <br />
+
+
+
+
+
+
+     <br />
+        <i>Date Projection :</i>
+        @Html.TextBoxFor(x => x.MVMovie.Date, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
+        <br />@Html.ValidationMessageFor(x => x.MVMovie.Date, "", new { @class = "error" })
+        <br />
+ 
+ */

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
 <!DOCTYPE html>
@@ -63,10 +63,10 @@
         <i>Filter :</i>
         @Html.DropDownListFor(x => x.MVFilterType.filter_type, new List<SelectListItem>
     {
- 
+
     new SelectListItem{Text="Price Increase", Value="Price Increase"},
     new SelectListItem{Text="Price Decrease", Value="Price Decrease"},
-    
+
 
     }, "-- Select Filter --")
         <br />@Html.ValidationMessageFor(x => x.MVFilterType.filter_type, "", new { @class = "error" })
@@ -84,48 +84,62 @@
 
 
 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Limitation Age</th>
-            <th>Price</th>
-            <th>Date</th>
-            <th>Movie Hours</th>
-            <th>Hall</th>
-            <th>Poster</th>
-            <th></th>
-        </tr>
-        @foreach (Movie x in Model.MVMovies)
-        {
 
-
-
-            <tr>
-                <td>@x.Title</td>
-                <td>@x.Category</td>
-                <td>@x.Limitation_Age</td>
-                <td>@x.Price</td>
-                <td>@x.Date</td>
-                <td>@x.BeginHourMovie - @x.EndHourMovie</td>
-                <td>@x.Hall</td>
-                <td style="margin-top:15px"><img src="@Url.Content(x.ImagePath)" height="90" width="90" /></td>
-
-
-
-
-            </tr>
-
-
-        }
-    </table>
-    @using (Html.BeginForm("Logout", "Client", FormMethod.Post))
+    @foreach (Movie x in Model.MVMovies)
     {
-        <input id="Submit1" type="submit" value="Log out" />
-    }
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@Url.Content(x.ImagePath)" alt="Card image cap" style="width:170px; height:200px;">
+            <div class="card-body">
+                <h5 class="card-title">@x.Title</h5>
+                <p class="card-text">@x.Limitation_Age</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+     }
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Limitation Age</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Movie Hours</th>
+                <th>Hall</th>
+                <th>Poster</th>
+                <th></th>
+            </tr>
+            @foreach (Movie x in Model.MVMovies)
+            {
 
 
 
-</body>
+                <tr>
+                    <td>@x.Title</td>
+                    <td>@x.Category</td>
+                    <td>@x.Limitation_Age</td>
+                    <td>@x.Price</td>
+                    <td>@x.Date</td>
+                    <td>@x.BeginHourMovie - @x.EndHourMovie</td>
+                    <td>@x.Hall</td>
+                    <td style="margin-top:15px"><img src="@Url.Content(x.ImagePath)" height="90" width="90" /></td>
+
+
+
+
+                </tr>
+
+
+            }
+        </table>
+        @using (Html.BeginForm("Logout", "Client", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" />
+        }
+
+
+
+    </body>
 </html>
 
