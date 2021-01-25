@@ -19,41 +19,55 @@ namespace Cinema_WebSite.Controllers
 
         public ActionResult SignUp()
         {
-            return View(new User());
+            return View();
         }
 
 
         public ActionResult HomeLogin()
         {
-            return View();
+            Movie movie = new Movie();
+            MovieData movdat = new MovieData();
+            CineViewModel cvm = new CineViewModel();
+            List<Movie> objmov = (from d in movdat.MoviesData select d).ToList();
+            cvm.MVMovies = objmov;
+            return View(cvm);
         }
 
-        public ActionResult Register(User uslo)
+
+        public ActionResult Register()
         {
+            CineViewModel cvm = new CineViewModel();
+            UserData userdat = new UserData();
+            User user = new User();
+            MovieData movdat = new MovieData();
+
+            user.FirstName = Request.Form["MVUser.FirstName"].ToString();
+            user.LastName = Request.Form["MVUser.LastName"].ToString();
+            user.Email = Request.Form["MVUser.Email"].ToString();
+            user.Password = Request.Form["MVUser.Password"].ToString();
+            user.ConfirmPassword = Request.Form["MVUser.ConfirmPassword"].ToString();
+            user.Status = "Client";
+
+            List<User> user1 = (from t in userdat.UsersData where t.Email == user.Email select t).ToList();
+
+            if(user1.Count>0)
+            {
+                ModelState.AddModelError("MVUser.Email", "There is already a user with this mail");
+                cvm.MVUser = user;
+                cvm.MVUsers = userdat.UsersData.ToList<User>();
+                return View("SignUp", cvm);
+            }
 
 
             if (ModelState.IsValid)
             {
-
-                UserData memdat = new UserData();
-                try
-                {
-                    if (uslo != null)
-                    {
-                        memdat.UsersData.Add(uslo);
-                        memdat.SaveChanges();
-                        return View("HomeLogin");
-                    }
-                }
-
-
-                catch (Exception ex)
-                {
-                    //ModelState.AddModelError("the username already exists");
-                    return View();
-                }
+                userdat.UsersData.Add(user);
+                userdat.SaveChanges();
+              
             }
-            return View();
+            List<Movie> mov = movdat.MoviesData.ToList();
+            cvm.MVMovies = mov;
+            return View("HomeLogin");
         }
 
 
@@ -67,8 +81,12 @@ namespace Cinema_WebSite.Controllers
                                                     // uvm.MVUser = new User();//object uvm User type in userviewmodel
             User user = new User();
 
-            //uvm.MVUser.Email = Request.Form["MVUser.Email"].ToString();
-            //uvm.MVUser.Password = Request.Form["MVUser.Password"].ToString();
+            Movie movie = new Movie();
+            MovieData movdat = new MovieData();
+            //CineViewModel cvm = new CineViewModel();
+            List<Movie> objmov = (from d in movdat.MoviesData select d).ToList();
+            uvm.MVMovies = objmov;
+
 
             user.Email = Request.Form["MVUser.Email"].ToString();
             user.Password = Request.Form["MVUser.Password"].ToString();
@@ -88,29 +106,27 @@ namespace Cinema_WebSite.Controllers
                         if (list_users1.First().Status == "Admin")
                         {
                             Session["Username"] = list_users1.First().Email;
-                        return RedirectToRoute("AdministratorHome", user);
+                        return RedirectToRoute("AdministratorHome");
                         //return RedirectToRoute("MenuAdministrator", user);
                         }
                         else if (list_users1.First().Status == "Client")
                         {
                             Session["Username"] = list_users1.First().Email;
-                            return RedirectToRoute("ClientHome", user);
+                            return RedirectToRoute("ClientHome");
                         }
                     }
                 else if(list_users1.Count==0 && list_users2.Count==1)
                 {
-                    ModelState.AddModelError("uvm.User.Username","Password not correct");//check to print the error
+                    ModelState.AddModelError("MVUser.Password","Incorrect password");//check to print the error
                 }
-                    else
-                    
-
-                    {
-                         ModelState.AddModelError("uvm.User.Username", String.Empty);
-                    }
+                else
+                {
+                    ModelState.AddModelError("MVUser.Email", String.Empty);
+                }
             }
 
-            uvm.MVUser = new User();
-            return View("HomeLogin");
+            uvm.MVUser = user;
+            return View("HomeLogin",uvm);
 
         }    
                     
@@ -126,7 +142,3 @@ namespace Cinema_WebSite.Controllers
     }
 }
 
-
-
-
- //< add name = "MVC_DB" connectionString = "metadata=res://*/MoviesEntity.csdl|res://*/MoviesEntity.ssdl|res://*/MoviesEntity.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-Q40CJ49I;initial catalog=MVC_DB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName = "System.Data.EntityClient" />

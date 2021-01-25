@@ -82,6 +82,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -300,17 +303,21 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Dat\HallData.cs" />
     <Compile Include="Dat\MovieData.cs" />
-    <Compile Include="Dat\MovieeData.cs" />
     <Compile Include="Dat\MovieProjectionData.cs" />
+    <Compile Include="Dat\ReservationData.cs" />
     <Compile Include="Dat\SeatData.cs" />
+    <Compile Include="Dat\SeatHallProjectionData.cs" />
     <Compile Include="Dat\UserData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemCart.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\SeatHallProjection.cs" />
     <Compile Include="Models\FilterType.cs" />
     <Compile Include="Models\Hall.cs" />
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\Moviee.cs" />
     <Compile Include="Models\MovieProjection.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\User.cs" />
@@ -491,8 +498,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Login\HomeLogin.cshtml" />
-    <Content Include="Views\Administrator\Print.cshtml" />
-    <Content Include="Views\Administrator\ManageMovies.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Administrator\UpdateHall.cshtml" />
@@ -503,11 +508,23 @@
     <Content Include="Views\Administrator\UpdateMovie.cshtml" />
     <Content Include="Views\Administrator\DetailsHall.cshtml" />
     <Content Include="Views\Client\ClientHome.cshtml" />
-    <Content Include="Views\Administrator\AddMovieDetails.cshtml" />
-    <Content Include="Views\Administrator\ManageMovies2.cshtml" />
+    <Content Include="Views\Administrator\ManageMovie.cshtml" />
+    <Content Include="Views\Administrator\ManageMovieProjection.cshtml" />
+    <Content Include="Views\Administrator\UpdateMovieProjection.cshtml" />
+    <Content Include="Views\Administrator\DetailsMovieProjection.cshtml" />
+    <Content Include="Views\Administrator\DetailMovieSeatProjection.cshtml" />
+    <Content Include="Views\Client\ProjectionDates.cshtml" />
+    <Content Include="Views\Administrator\ChangePasswordAdmin.cshtml" />
+    <Content Include="Views\Client\SelectSeatReservation.cshtml" />
+    <Content Include="Views\Client\ChangePasswordClient.cshtml" />
+    <Content Include="Views\Client\ChooseSeat.cshtml" />
+    <Content Include="Views\Client\ShoppingCard.cshtml" />
+    <Content Include="Views\Client\OrderConfirmation.cshtml" />
+    <Content Include="Views\Client\MyReservation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

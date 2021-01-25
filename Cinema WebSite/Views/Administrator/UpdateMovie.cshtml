@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Index</title>
+    <title>@ViewBag.Title</title>
     <style>
 
         .ui-datepicker-trigger {
@@ -26,6 +26,36 @@
         body {
             background: url('/images/background_cine.jpg');
             background-size: 100%;
+        }
+
+        .container {
+            width: 300px;
+            height: 75px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .sign-up-form {
+            width: 88%;
+            height: 550px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: black;
+            border-radius: 5px;
+        }
+        .input-box {
+            border-radius: 15px;
+            padding: 5px;
+            height: 22px;
+            width: 225px;
+            border: 1px solid #918787;
+            outline: none;
         }
     </style>
 
@@ -43,76 +73,111 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <body>
 
-    <h1>Update movie</h1>
-
-    @using (Html.BeginForm("SaveUpdateMovie", "Administrator", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Movie Update</h4>
-            <hr />
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.MVMovie.Id)
-
-        <div>
-            <i>Title :</i>
-            @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
-            <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
-            <br />
 
 
-            <i>Age Limitation :</i>
-            @Html.DropDownListFor(x => x.MVMovie.Limitation_Age, new List<SelectListItem>
+    <div class="container">
+        @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
         {
-        new SelectListItem{Text="G - General Audiences", Value="G - General Audiences"},
-        new SelectListItem{Text="18 - Adults only", Value="18 - Adults only"},
-        new SelectListItem{Text="16 - Over 16 years", Value="16 - Over 16 years"},
-        new SelectListItem{Text="12 - Over 12 years", Value="12 - Over 12 years"},
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
 
-        }, "-- Select Limit Age --")
-            <br />@Html.ValidationMessageFor(x => x.MVMovie.Limitation_Age, "", new { @class = "error" })
-            <br />
-
-
-            <i>Date projection :</i>
-            @Html.EditorFor(x => x.MVMovie.Date, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
-            <br />
-
-            <i>Category : </i>
-            @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "Select Category")
-            <br /><br />
-
-            <i> Movie Hour : </i>
-            @Html.DropDownListFor(model => model.MVMovie.BeginHourMovie, Enumerable.Range(7, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<span> to </span>@Html.DropDownListFor(model => model.MVMovie.EndHourMovie, Enumerable.Range(9, 14).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-            <br /><br />
-
-            <i>Hall :</i>
-            @Html.DropDownListFor(model => model.MVMovie.Hall, new SelectList(Enum.GetValues(typeof(Halls))), "Hall")
-            <br />
-
-
-
-            <i> Poster :</i>
-            @Html.LabelFor(x => x.MVMovie.ImagePath, new { placeholder = "ImagePath" })
-            <div>
-                <input type="file" id="file" name="file" />
-            </div>
-            <br />
-
-        </div>
-        </div>
-        <input id="submit1" type="submit" class="sign-btn" value="Save Changement">
-
-        using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+        @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
         {
-            <input id="submit1" type="submit" class="sign-btn" value="Back Manage Movies">
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+        {
+            <input id="submit1" type="submit" class="sign-btn" value="Back Manage Movies" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
 
         }
-    }
+    </div>
 
-    </body>
+
+
+
+
+
+    <div class="sign-up-form">
+        <h1 style="text-align:left">Update Movie</h1>
+
+        @using (Html.BeginForm("SaveUpdateMovie", "Administrator", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.MVMovie.Id)
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.MVMovie.Id)
+                @Html.HiddenFor(model => model.MVMovieProjection.Title)
+
+                <div>
+                    <b>Title :</b>
+                    @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
+                    <br />
+
+                    <b>Realisator :</b>
+                    @Html.TextBoxFor(x => x.MVMovie.Realisator, new { placeholder = "Realisator", @class = "input-box", @id = "Text1", @type = "text" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.Realisator, "", new { @class = "error" })
+                    <br />
+
+                    <b>Category : </b>
+                    @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-Category-")
+                    <br /><br />
+
+                    <b>Age Limitation :</b>
+                    @Html.DropDownListFor(x => x.MVMovie.LimitAge, new List<SelectListItem>
+                {
+                new SelectListItem{Text="G - General Audiences", Value="G - General Audiences"},
+                new SelectListItem{Text="18 - Adults only", Value="18 - Adults only"},
+                new SelectListItem{Text="16 - Over 16 years", Value="16 - Over 16 years"},
+                new SelectListItem{Text="12 - Over 12 years", Value="12 - Over 12 years"},
+
+                }, "-- Select Limit Age --")
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.LimitAge, "", new { @class = "error" })
+                    <br />
+
+                    <br />
+                    <v>Release Date  :</v>
+                    @Html.EditorFor(x => x.MVMovie.ReleaseDate, new { placeholder = "Release Date", @class = "form-control", @id = "Text1", @type = "text" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.ReleaseDate, "", new { @class = "error" })
+                    <br />
+
+
+                    <br />
+                    <b>Running Time (in minutes) :</b>
+                    @Html.TextBoxFor(x => x.MVMovie.RunningTime, new { placeholder = "Running Time", @class = "input-box", @id = "Text1", @type = "text" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.RunningTime, "", new { @class = "error" })
+                    <br />
+
+                    <b>Price :</b>
+                    @Html.TextBoxFor(x => x.MVMovie.Price, new { placeholder = "Running Time", @class = "input-box", @id = "Text1", @type = "text" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.Price, "", new { @class = "error" })
+                    <br />
+
+
+
+                    <b> Poster :</b>
+                    @Html.LabelFor(x => x.MVMovie.Poster, new { placeholder = "ImagePath" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovie.Poster, "", new { @class = "error" })
+                    <input type="file" id="file" name="file" style="align-items:center" />
+
+                    <br />
+
+                </div>
+            </div>
+            <input id="submit1" type="submit" class="sign-btn" value="Save Changement" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+
+
+    </div>
+
+
+
+
+</body>
 </html>
 
 

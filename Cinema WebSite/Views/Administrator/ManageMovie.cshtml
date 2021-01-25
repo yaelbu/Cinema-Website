@@ -1,0 +1,310 @@
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+@{
+    ViewBag.Title = "ManageMovie";
+
+}
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+
+      
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            width:auto;
+            padding: 5px;
+            text-align: center;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .container {
+            width: 300px;
+            height: 75px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .sign-up-form {
+            width: 88%;
+            height: 550px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: black;
+            border-radius: 5px;
+        }
+        .newstyle {
+            border-radius:12px; border-width:thin; font-size:18px; border-color:black; margin:3px; padding-left:10px; padding-right:10px; padding-bottom:5px; padding-top:5px; background-color:transparent;
+        }
+        .input-box {
+            border-radius: 15px;
+            padding: 5px;
+            height: 22px;
+            width: 225px;
+            border: 1px solid #918787;
+            outline: none;
+        }
+
+    </style>
+
+</head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<body>
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+    @if (ViewBag.message2 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message2');
+            };
+        </script>
+    }
+
+
+
+    @if (ViewBag.message3 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message3');
+            };
+        </script>
+    }
+
+
+
+    <div class="container">
+        @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("BackManageMoviesProjection", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Movies Projection" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ChangePasswordAdmin", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Change Password" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ManagePrices", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Prices" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Halls" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+    </div>
+
+
+    <div class="sign-up-form">
+        <h1>Add a Movie</h1>
+        <br />
+        @using (Html.BeginForm("SaveMovie", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.MVMovie.Id)
+            @Html.HiddenFor(model => model.MVMovieProjection.ProjectionHall)
+
+
+
+
+
+
+
+            <br />
+            <b>Title :</b>
+            @Html.TextBoxFor(x => x.MVMovie.Title, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Title, "", new { @class = "error" })
+            <br />
+
+            <b>Realisator :</b>
+            @Html.TextBoxFor(x => x.MVMovie.Realisator, new { placeholder = "Realisator", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Realisator, "", new { @class = "error" })
+            <br />
+
+
+
+            <b>Category : </b>
+            @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-- Select Category --")
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
+            <br />
+
+
+
+            <b>Age Limitation :</b>
+            @Html.DropDownListFor(x => x.MVMovie.LimitAge, new List<SelectListItem>
+        {
+        new SelectListItem{Text="G - General Audiences", Value="G - General Audiences"},
+        new SelectListItem{Text="18 - Adults only", Value="18 - Adults only"},
+        new SelectListItem{Text="16 - Over 16 years", Value="16 - Over 16 years"},
+        new SelectListItem{Text="12 - Over 12 years", Value="12 - Over 12 years"},
+
+        }, "-- Select Limit Age --")
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.LimitAge, "", new { @class = "error" })
+            <br />
+
+
+            <b>Release Date :</b>
+            @Html.EditorFor(x => x.MVMovie.ReleaseDate, new { placeholder = "ReleaseDate", @class = "form-control", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.ReleaseDate, "", new { @class = "error" })
+            <br />
+
+
+
+            <b>Running Time (in minutes) :</b>
+            @Html.TextBoxFor(x => x.MVMovie.RunningTime, new { placeholder = "Running Time", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.RunningTime, "", new { @class = "error" })
+            <br />
+
+
+
+            <b>Price:</b>
+            @Html.TextBoxFor(x => x.MVMovie.Price, new { placeholder = "Price", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Price, "", new { @class = "error" })
+            <br />
+
+
+            <b> Poster :</b>
+            @Html.LabelFor(x => x.MVMovie.Poster, new { placeholder = "ImagePath" })
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.Poster, "", new { @class = "error" })
+            <input type="file" id="file" name="file" style="align-items:center" />
+
+            <br />
+
+            <input id="submit1" type="submit" class="sign-btn" value="Save" style="margin-bottom: 10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+    </div>
+
+    <br /><br />
+
+
+
+
+
+
+
+
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Realisator</th>
+            <th>Category</th>
+            <th>Limit Age</th>
+            <th>Price</th>
+            <th>Release Date</th>
+            <th>RunningTime</th>
+            <th>Poster</th>
+            <th></th>
+        </tr>
+        @foreach (Movie x in Model.MVMovies)
+        {
+
+
+
+            <tr>
+                <td>@x.Title</td>
+                <td>@x.Realisator</td>
+                <td>@x.Category</td>
+                <td>@x.LimitAge</td>
+                <td>@x.Price</td>
+                <td>
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @x.ReleaseDate))
+                </td>
+                <td>@x.RunningTime minutes</td>
+
+
+
+                <td style="margin-top:15px; column-width: 150px;"><img src="@Url.Content(x.Poster)" height="170" width="120" /></td>
+
+
+                <td style="background-color:transparent">
+
+                    @using (Html.BeginForm("DeleteMovie", "Administrator", new { id = x.Id }))
+                    {
+                        <input type="submit" class="newstyle" value="Delete" />
+
+                    }
+                    @using (Html.BeginForm("UpdateMovie", "Administrator", new { id = x.Id }))
+                    {
+                        <input type="submit" class="newstyle" value="Update" />
+
+                    }
+                    @using (Html.BeginForm("DetailsMovie", "Administrator", new { id = x.Id }))
+                    {
+                        <input type="submit" class="newstyle" value="Details" />
+
+                    }
+                </td>
+
+            </tr>
+
+
+        }
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

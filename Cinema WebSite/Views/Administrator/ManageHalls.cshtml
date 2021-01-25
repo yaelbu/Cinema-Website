@@ -22,13 +22,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Index</title>
     <style>
+
+        .ui-datepicker-trigger {
+            float: inherit;
+            glyph-orientation-vertical: auto;
+        }
+        .sign-up-form {
+            width: 88%;
+            height: 280px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: black;
+            border-radius: 5px;
+        }
         body {
             background: url('/images/background_cine.jpg');
             background-size: 100%;
         }
 
-        div1 {
-            background-color: red;
+        th, td {
+            border: 1px solid black;
+            margin-left: 10px;
+            text-align: center;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newstyle {
+            border-radius: 12px;
+            border-width: thin;
+            font-size: 16px;
+            border-color: black;
+            margin: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-bottom: 4px;
+            padding-top: 4px;
+            background-color: transparent;
+        }
+        .container1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } 
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .container {
+            width: 300px;
+            height: 75px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-box {
+            border-radius: 15px;
+            padding: 5px;
+            height: 22px;
+            width: 225px;
+            border: 1px solid #918787;
+            outline: none;
         }
     </style>
 
@@ -44,7 +110,95 @@
 
 <body>
 
-    <div>
+    @if (ViewBag.message11 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message11');
+            };
+        </script>
+    }
+
+
+    @if (ViewBag.message18 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message18');
+            };
+        </script>
+    }
+    @Html.HiddenFor(model => model.MVHall.Hall_Name)
+
+
+    @if (ViewBag.message19 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message19');
+            };
+        </script>
+    }
+
+
+    @if (ViewBag.message20 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message20');
+            };
+        </script>
+    }
+
+
+    @if (ViewBag.message21 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message21');
+            };
+        </script>
+    }
+
+
+
+
+    @Html.HiddenFor(model => model.MVHall.Hall_Name)
+
+
+
+
+    <div class="container">
+        @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+        {
+            <input id="submit1" type="submit" class="sign-btn" value="Manage Movies" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+        }
+        @using (Html.BeginForm("BackManageMoviesProjection", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Movies Projection" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ChangePasswordAdmin", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Change Password" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ManagePrices", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Prices" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+    </div>
+
+
+
+
+    <div class="sign-up-form">
         <h1 style="text-align:left">Add a Hall</h1>
         @using (Html.BeginForm("SaveHall", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -63,15 +217,15 @@
 
 
 
-                <input id="submit1" type="submit" class="sign-btn" value="Save">
-                <hr />
+                <input id="submit1" type="submit" class="sign-btn" value="Save" style="margin-bottom: 10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
 
             </div>
         }
     </div>
 
 
-
+    <br /><br />
     <table>
         <tr>
             <th>Hall Name</th>
@@ -83,24 +237,25 @@
 
 
             <tr>
-                
+
                 <td>@hall.Hall_Name</td>
                 <td>@hall.Capacity</td>
                 <td>
-                    @using (Html.BeginForm("DeleteHall", "Administrator", new { id = hall.Id }))
-                    {
-                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete the Hall @hall.Hall_Name');" />
-                    }
+                    <div class="container1">
+                        @using (Html.BeginForm("DeleteHall", "Administrator", new { id = hall.Id }))
+                        {
+                            <input type="submit" class="newstyle" value="Delete Hall" onclick="return confirm('Are you sure you want to delete the Hall @hall.Hall_Name');" />
+                        }
 
-                    @using (Html.BeginForm("UpdateHall", "Administrator", new { id = hall.Id }))
-                    {
-                        <input type="submit" value="Update" />
-                    }
-                    @using (Html.BeginForm("DetailsHall", "Administrator", new { id = hall.Id }))
-                    {
-                        <input type="submit" value="Detail" />
-                    }
-
+                        @using (Html.BeginForm("UpdateHall", "Administrator", new { id = hall.Id }))
+                        {
+                            <input type="submit" class="newstyle" value="Update" />
+                        }
+                        @using (Html.BeginForm("DetailsHall", "Administrator", new { id = hall.Id }))
+                        {
+                            <input type="submit" class="newstyle" value="Detail" />
+                        }
+                    </div>
 
                 </td>
 
@@ -109,10 +264,9 @@
 
         }
     </table>
-    @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
-    {
-        <input id="Submit1" type="submit" value="Log out" />
-    }
+
+
+
 
 
 </body>

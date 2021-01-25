@@ -1,0 +1,162 @@
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+@{
+    ViewBag.Title = "UpdateMovieProjection";
+
+}
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Index</title>
+    <style>
+
+        .ui-datepicker-trigger {
+            float: inherit;
+            glyph-orientation-vertical: auto;
+        }
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+        .sign-up-form {
+            width: 88%;
+            height: 400px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: black;
+            border-radius: 5px;
+        }
+        .container {
+            width: 300px;
+            height: 75px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<body>
+
+    <div class="container">
+        @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+
+        @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+
+        @using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+        {
+            <input id="submit1" type="submit" class="sign-btn" value="Manage Movies" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+
+        @using (Html.BeginForm("BackManageMoviesProjection", "Administrator", FormMethod.Post))
+        {
+            <input id="submit1" type="submit" class="sign-btn" value="Manage Movies Projection" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+
+    </div>
+
+
+
+
+    <div class="sign-up-form">
+        <h1 style="text-align:left">Update movie projection</h1>
+
+
+        @using (Html.BeginForm("SaveUpdateMovieProjection", "Administrator", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MVMovieProjection.Title)
+
+
+            <div class="form-horizontal">
+
+               
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.MVMovieProjection.Id)
+
+                <div>
+                    <b>Title :</b>
+                    @Html.EditorFor(x => x.MVMovieProjection.Title, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovieProjection.Title, "", new { @class = "error" })
+                    <br />
+
+
+                    <b>Date projection :</b>
+                    @Html.EditorFor(x => x.MVMovieProjection.ProjectionDate, new { placeholder = "ProjectionDate", @class = "form-control", @id = "Text1", @type = "text" })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovieProjection.ProjectionDate, "", new { @class = "error" })
+                    <br />
+
+
+
+
+                    <b>Begin projection hour :</b>
+                    @Html.TextBoxFor(x => x.MVMovieProjection.BeginProjectionHour, new { htmlAttributes = new { @readonly = "true", @class = "form-control datepicker" } })
+                    <br />@Html.ValidationMessageFor(x => x.MVMovieProjection.BeginProjectionHour, "", new { @class = "error" })
+                    <br />
+
+                    <b>Hall</b>
+                    @Html.DropDownListFor(x => x.MVMovieProjection.ProjectionHall, (SelectList)ViewBag.Hallid, "--Select Hall--", "Hall_Name")
+
+                    <br />@Html.ValidationMessageFor(x => x.MVMovieProjection.ProjectionHall, "", new { @class = "error" })
+
+                    <br />
+
+
+
+                </div>
+            </div>
+            <input id="submit1" type="submit" class="sign-btn" value="Save Changement" style="margin-bottom: 10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,116 @@
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Payment</title>
+    <style>
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+
+
+
+
+        .sign-up-form {
+            width: 400px;
+            height: 450px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color:black;
+            border-radius:5px;
+        }
+
+
+
+        .input-box {
+            border-radius: 15px;
+            padding: 5px;
+            height: 22px;
+            width: 225px;
+            border: 1px solid #918787;
+            outline: none;
+        }
+
+        .error {
+            color: darkred;
+            font-family: Candara;
+            font-size: 70%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+
+
+<body>
+    <div class="sign-up-form">
+        <br /><br />
+        <h1>Payment</h1>
+
+        @using (Html.BeginForm("SaveOrder", "Client", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.MVMovie.Id)
+            @Html.HiddenFor(model => model.MVMReservation.OrderNumber)
+
+            <br />
+            <br />
+            <b>Credit Number :</b>
+            @Html.TextBoxFor(x => x.MVMPayment.CreditNumber, new { placeholder = "Credit Number", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMPayment.CreditNumber, "", new { @class = "error" })
+            <br />
+
+
+            <b>cvv :</b>
+            @Html.TextBoxFor(x => x.MVMPayment.cvvNumber, new { placeholder = "cvv", @class = "input-box", @id = "Text1", @type = "text" })
+            <br />@Html.ValidationMessageFor(x => x.MVMPayment.cvvNumber, "", new { @class = "error" })
+            <br />
+            <br />
+
+
+
+
+            <b>Expiration date :</b>
+            @Html.DropDownListFor(x => x.MVMPayment.MonthExpiration, new SelectList(Enumerable.Range(1, 12)), "Month")<b>  </b>@Html.DropDownListFor(x => x.MVMPayment.YearExpiration, new SelectList(Enumerable.Range(2021, 2049)), "Year")
+            <br />@Html.ValidationMessageFor(x => x.MVMovie.LimitAge, "", new { @class = "error" })
+            <br />
+
+
+            <input id="submit1" type="submit" class="sign-btn" value="Confirm" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+
+        
+
+
+
+        @using (Html.BeginForm("CancelOrder", "Client", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Cancel order" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" onclick="return confirm('If you confirm the cancel order, all the order will be deleted')" ; />
+        }
+
+
+    </div>
+</body>
+</html>

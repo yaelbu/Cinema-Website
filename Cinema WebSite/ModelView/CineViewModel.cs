@@ -8,9 +8,7 @@ namespace Cinema_WebSite.ModelView
 {
     public class CineViewModel
     {
-        public Movie MVMovie { get; set; }
-
-        public List<Movie> MVMovies { get; set; }
+ 
         public User MVUser { get; set; }
 
         public List<User> MVUsers { get; set; }
@@ -21,13 +19,26 @@ namespace Cinema_WebSite.ModelView
 
         public FilterType MVFilterType { get; set; }
 
-        public Moviee MVMoviee { get; set; }
-        public List<Moviee> MVMoviees { get; set; }
+       public Movie MVMovie { get; set; }
+       public List<Movie> MVMovies { get; set; }
 
         public MovieProjection MVMovieProjection { get; set; }
 
         public List<MovieProjection> MVMoviesProjection {get; set;}
 
+        public SeatHallProjection MVMSeatHall { get; set; }
+
+        public List<SeatHallProjection> MVMSeatsHall { get; set; }
+
+        public Seats MVMSeat { get; set; }
+
+        public List<Seats> MVMSeats { get; set; }
+
+       public Reservation MVMReservation { get; set; }
+
+        public List<Reservation> MVMReservations { get; set; }
+
+        public Payment MVMPayment { get; set; }
 
     }
 }

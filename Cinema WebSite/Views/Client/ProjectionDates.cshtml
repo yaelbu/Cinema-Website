@@ -1,0 +1,153 @@
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+@{
+    ViewBag.Title = "NewView";
+
+}
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+
+
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            margin-left: 10px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .container {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<body>
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+    @section scripts{
+
+
+    }
+
+
+
+
+<div style=" background-color: rgba(201, 150, 115, 0.8);    border-color: black;        border-style: solid;        width: 98%;        margin-left: auto;        margin-right: auto; padding:20px">
+    <h1 style="text-align:left">Projection date : "@Html.DisplayFor(model => model.MVMovie.Title)"</h1>
+    <h3>Last Projection for @Html.DisplayFor(model => model.MVMovie.Title) : @ViewBag.LastProjectionDay </h3>
+
+
+    <br /><br />
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Projection Date</th>
+            <th>Begin Projection Hour</th>
+            <th>Hall</th>
+            <th></th>
+        </tr>
+        @foreach (MovieProjection x in Model.MVMoviesProjection)
+        {
+
+
+
+            <tr>
+                <td>@x.Title</td>
+                <td>
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @x.ProjectionDate))
+                </td>
+                <td>
+                    @Convert.ToString(string.Format("{0:hh\\:mm}", @x.BeginProjectionHour))
+                </td>
+                <td>@x.ProjectionHall</td>
+
+
+
+                <td style="background-color:transparent">
+
+                    @using (Html.BeginForm("SelectSeatReservation", "Client", new { id = x.Id }))
+                    {
+                        <input type="submit" style="border-radius: 12px; background-color:rgba(201, 150, 115, 0.8);" value="Reservation? Click Here" />
+                    }
+
+                </td>
+
+            </tr>
+
+
+        }
+    </table>
+
+
+</div>
+
+
+    
+
+
+
+    <div class="container">
+        @using (Html.BeginForm("ClientHome", "Client", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+
+        @using (Html.BeginForm("Logout", "Client", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+
+    </div>
+
+
+</body>
+</html>

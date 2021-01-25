@@ -15,22 +15,74 @@
     <meta name="viewport" content="width=device-width" />
     <title>ClientHome</title>
     <style>
+        <style >
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
 
-
-        .ui-datepicker-trigger {
-            float: inherit;
-            glyph-orientation-vertical: auto;
+        a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            font-size:15px;
+            padding: 20px 5px;
+            color: white;
         }
 
         body {
+            font-family: Arial;
             background: url('/images/background_cine.jpg');
             background-size: 100%;
+        }
+
+        ul {
+            top: 50px;
+            position: absolute;
+            width: 100%;
+        }
+
+        img {
+            width: 40px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        nav {
+            background-color: rgba(16,16,16,.8);
+            width: 350px;
+            height: 100%;
+            position: absolute;
+            left: -350px;
+            transition: all .5s;
+        }
+
+        input[type="checkbox"]:checked ~ nav {
+            transform: translateX(350px);
+        }
+
+        a:hover {
+            background-color: rgba(176,224,230);
+            color: black;
+        }
+
+        label {
+            padding: 15px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
         }
 
         th, td {
             border: 1px solid black;
             margin-left: 10px;
             text-align: center;
+            padding: 5px;
         }
 
         table {
@@ -45,101 +97,159 @@
             font-weight: bold;
             font-size: 12px;
         }
-  
+        .container {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
+
+
+
+
+
 
 
 
 
 </head>
 <body>
-    <div>
-        <h1>Client Home !!!!!</h1>
-    </div>
-    @using (Html.BeginForm("ValidFilter", "Client", FormMethod.Post))
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.MVUser.Email)
+
+
+    <input type="checkbox" id="chec">
+    <label for="chec">
+        <label>  </label><img src="~/images/risco_menu.png" />
+    </label>
+
+
+    <nav>
+        <ul>
+            <li><a href="@Url.Action("MyReservation","Client")">MY RESERVATION</a></li>
+            <li><a href="@Url.Action("ChangePasswordClient","Client")">CHANGE PASSWORD</a></li>
+            <li><a href="@Url.Action("Logout","Client")">LOG OUT</a></li>
+            <li><a href="@Url.Action("ShoppingCard","Client")">SHOPPING CARD</a></li>
+
+
+
+
+        </ul>
+    </nav>
+
+
+    @if (ViewBag.Message != null)
     {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.Message');
+            };
+        </script>
+    }
 
-
-        <i>Filter :</i>
-        @Html.DropDownListFor(x => x.MVFilterType.filter_type, new List<SelectListItem>
+    @if (ViewBag.message13 != null)
     {
-
-    new SelectListItem{Text="Price Increase", Value="Price Increase"},
-    new SelectListItem{Text="Price Decrease", Value="Price Decrease"},
-
-
-    }, "-- Select Filter --")
-        <br />@Html.ValidationMessageFor(x => x.MVFilterType.filter_type, "", new { @class = "error" })
-        <br />
-
-
-        <i>Category : </i>
-        @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-- Select Category --")
-        <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
-        <br /><br />
-
-
-        <input id="Submit1" type="submit" value="Appliquer" />
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message13');
+            };
+        </script>
     }
 
 
-
-
-    @foreach (Movie x in Model.MVMovies)
-    {
-
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="@Url.Content(x.ImagePath)" alt="Card image cap" style="width:170px; height:200px;">
-            <div class="card-body">
-                <h5 class="card-title">@x.Title</h5>
-                <p class="card-text">@x.Limitation_Age</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+    <div style=" background-color: rgba(201, 150, 115, 0.8);    border-color: black;        border-style: solid;        width: 98%;        margin-left: auto;        margin-right: auto;">
+        <div>
+            <h1>Welcome @Html.DisplayFor(x => x.MVUser.FirstName) @Html.DisplayFor(x => x.MVUser.LastName)</h1>
         </div>
-     }
+        @using (Html.BeginForm("ValidFilter", "Client", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.MVMovieProjection.Id)
+            @Html.HiddenFor(model => model.MVMovie.Id)
 
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Limitation Age</th>
-                <th>Price</th>
-                <th>Date</th>
-                <th>Movie Hours</th>
-                <th>Hall</th>
-                <th>Poster</th>
-                <th></th>
-            </tr>
-            @foreach (Movie x in Model.MVMovies)
+
+            <div style="margin-left: 20px; padding:20px">
+
+
+
+                <i>Filter :</i>
+                @Html.DropDownListFor(x => x.MVFilterType.filter_type, new List<SelectListItem>
             {
 
+            new SelectListItem{Text="Price Increase", Value="Price Increase"},
+            new SelectListItem{Text="Price Decrease", Value="Price Decrease"},
 
 
-                <tr>
-                    <td>@x.Title</td>
-                    <td>@x.Category</td>
-                    <td>@x.Limitation_Age</td>
-                    <td>@x.Price</td>
-                    <td>@x.Date</td>
-                    <td>@x.BeginHourMovie - @x.EndHourMovie</td>
-                    <td>@x.Hall</td>
-                    <td style="margin-top:15px"><img src="@Url.Content(x.ImagePath)" height="90" width="90" /></td>
+            }, "-- Select Filter --")
+                <br />@Html.ValidationMessageFor(x => x.MVFilterType.filter_type, "", new { @class = "error" })
+                <br />
 
 
+                <i>Category : </i>
+                @Html.DropDownListFor(m => m.MVMovie.Category, new SelectList(Enum.GetValues(typeof(Category))), "-- Select Category --")
+                <br />@Html.ValidationMessageFor(x => x.MVMovie.Category, "", new { @class = "error" })
+                <br /><br />
 
 
-                </tr>
+                <input id="Submit1" type="submit" value="Appliquer" />
+            </div>
 
-
-            }
-        </table>
-        @using (Html.BeginForm("Logout", "Client", FormMethod.Post))
-        {
-            <input id="Submit1" type="submit" value="Log out" />
         }
 
 
+    </div>
+    <br /><br /><br />
 
-    </body>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Realisator</th>
+            <th>Category</th>
+            <th>Limitation Age</th>
+            <th>Price</th>
+            <th>Date Release</th>
+            <th>Running Time</th>
+            <th>Poster</th>
+            <th></th>
+        </tr>
+        @foreach (Movie x in Model.MVMovies)
+        {
+
+
+
+            <tr>
+                <td>
+                    @using (Html.BeginForm("ProjectionDates", "Client", new { id = x.Id }))
+                    {
+                        <input type="submit" value="@x.Title" />
+                    }
+                </td>
+
+                <td>@x.Realisator</td>
+                <td>@x.Category</td>
+                <td>@x.LimitAge</td>
+                <td>@x.Price</td>
+                <td>
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", @x.ReleaseDate))
+                </td>
+                <td>@x.RunningTime minutes</td>
+
+                <td style="margin-top:15px"><img src="@Url.Content(x.Poster)" height="100" width="250" /></td>
+
+
+
+
+            </tr>
+
+
+        }
+    </table>
+
+
+</body>
 </html>
 

@@ -17,6 +17,7 @@ namespace Cinema_WebSite.Models
 
         public int SeatNumber { get; set; }
 
-        public String StatusSeat { get; set; }
+        //public String StatusSeat { get; set; }
+
     }
 }

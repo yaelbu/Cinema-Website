@@ -1,4 +1,7 @@
-﻿
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+
+
 @{
     Layout = null;
 }
@@ -66,6 +69,10 @@
             position: absolute;
             z-index: 1;
         }
+
+        h1 {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -78,6 +85,32 @@
 
 
 <body>
+    <h1>Welcome @Html.DisplayFor(x => x.MVUser.FirstName) @Html.DisplayFor(x => x.MVUser.LastName)</h1>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.MVUser.Email)
+
+
+
+    @if (ViewBag.message14 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message14');
+            };
+        </script>
+    }
+
+
+    @if (ViewBag.message23 != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message23');
+            };
+        </script>
+    }
+
+
     <input type="checkbox" id="chec">
     <label for="chec">
         <img src="~/images/risco_menu.png" />
@@ -86,11 +119,11 @@
 
     <nav>
         <ul>
-            <li><a href="@Url.Action("ManageMovies","Administrator")">MANAGE MOVIES</a></li>
-            <li><a href="@Url.Action("ManageMovies2","Administrator")">MANAGE MOVIES2</a></li>
+            <li><a href="@Url.Action("ManageMovie","Administrator")">MANAGE MOVIES INFORMATIONS</a></li>
+            <li><a href="@Url.Action("ManageMovieProjection","Administrator")">MANAGE MOVIES PROJECTION</a></li>
             <li><a href="@Url.Action("ManageHalls","Administrator")">MANAGE HALLS</a></li>
             <li><a href="@Url.Action("ManagePrices","Administrator")">MANAGE PRICES</a></li>
-            <li><a href="@Url.Action("AddMovieDetails","Administrator")">MOVIE DETAILS WITHOUT DATE</a></li>
+            <li><a href="@Url.Action("ChangePasswordAdmin","Administrator")">CHANGE PASSWORD</a></li>
             <li><a href="@Url.Action("Logout","Administrator")">LOG OUT</a></li>
 
 

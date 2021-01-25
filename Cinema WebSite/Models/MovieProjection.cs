@@ -21,19 +21,36 @@ namespace Cinema_WebSite.Models
         public String Title { get; set; }
 
 
+
         [Required]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ProjectionDate { get; set; }
 
 
+
+
+
         [Required]
-        public DateTime BeginProjectionHour { get; set; }
+        [DataType(DataType.Time)]
+        //[Range(typeof(TimeSpan), "03:00:00", "22:00:00")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}")]
+        public TimeSpan BeginProjectionHour { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}")]
+        public TimeSpan EndProjectionHour { get; set; }
 
 
 
         [Required]
         public String ProjectionHall { get; set; }
 
-
+        public static implicit operator TimeSpan(MovieProjection v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

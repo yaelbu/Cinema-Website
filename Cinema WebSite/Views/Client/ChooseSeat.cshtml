@@ -1,0 +1,173 @@
+﻿
+
+@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+
+@{
+    ViewBag.Title = "ChooseSeat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+
+
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            margin-left: 10px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .container {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<body>
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+    @section scripts{
+
+
+    }
+
+
+
+
+<div style=" background-color: rgba(201, 150, 115, 0.8);    border-color: black;        border-style: solid;        width: 98%;        margin-left: auto;        margin-right: auto; padding:20px">
+    <h1 style="text-align:left">Reservation "@Html.DisplayFor(model => model.MVMReservation.OrderNumber)"</h1>
+
+
+
+    <table>
+        <tr>
+            <th>Seat Number</th>
+            <th></th>
+        </tr>
+        @foreach (Reservation x in Model.MVMReservations)
+        {
+
+
+
+            <tr>
+
+
+                <td>@x.SeatNumber</td>
+
+                <td>
+                    @using (Html.BeginForm("DeleteMovie", "Administrator", new { id = x.Id }))
+                    {
+                        <input type="submit" value="Delete" style="border-radius: 12px; background-color:rgba(201, 150, 115, 0.8);" onclick="return confirm('Are you sure you want to delete  the seatº @x.SeatNumber');" />
+                    }
+                </td>
+
+
+            </tr>
+
+
+        }
+    </table>
+    <td style="background-color:transparent">
+
+
+
+        <div class="container">
+
+            @using (Html.BeginForm("Logout", "Client", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+
+            }
+
+            @using (Html.BeginForm("ClientHome", "Client", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Home Page" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+
+            }
+
+        </div>
+        <br /><br />
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+        <div class="container">
+            @using (Html.BeginForm("ClientHome", "Client", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Add another seat" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
+
+            @using (Html.BeginForm("ModifyReservation", "Client", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Modify my reservation" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
+            @using (Html.BeginForm("OrderConfirmation", "Client", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Order confirmation" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
+
+        </div>
+
+
+</body>
+</html>

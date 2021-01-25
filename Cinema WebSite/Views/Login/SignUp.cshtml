@@ -11,20 +11,20 @@
     <meta name="viewport" content="width=device-width" />
     <title>SignUp</title>
     <style>
-        body {
-            background-image: url('https://image.freepik.com/free-photo/top-view-arrangement-of-cinema-elements-on-yellow-background-with-copy-space_23-2148416777.jpg');
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background-size: cover;
-            background-position: center;
+       
+            body
+
+        {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
         }
+
 
 
 
         .sign-up-form {
             width: 325px;
-            height: 475px;
+            height: 545px;
             box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
             background: #fff;
             padding: 20px;
@@ -32,36 +32,21 @@
             text-align: center;
             margin-bottom: 50px;
             margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color:darkgray;
         }
 
-        .sign-btn {
-            color: #fff;
-            width: 100%;
-            padding: 10px;
-            border-radius: 20px;
-            font-size: 15px;
-            margin: 10px 0;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            background-color: darkred;
-        }
+
 
         .input-box {
             border-radius: 15px;
             padding: 5px;
-            height: 15px;
+            height:22px;
             width: 225px;
             border: 1px solid #918787;
             outline: none;
         }
 
-        .error {
-            color: darkred;
-            font-family: Candara;
-            font-size: 70%;
-            font-weight: bold;
-        }
     </style>
 </head>
 
@@ -82,29 +67,38 @@
 
             <br />
 
-            @Html.TextBoxFor(x => x.MVUser.FirstName, new { placeholder = "First Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.MVUser.FirstName })
+            @Html.TextBoxFor(x => x.MVUser.FirstName, new { placeholder = "First Name", @class = "input-box", @id = "Text1", @type = "text" })
             <br />@Html.ValidationMessageFor(x => x.MVUser.FirstName, "", new { @class = "error" })
             <br /><br />
 
 
-            @Html.TextBoxFor(x => x.MVUser.LastName, new { placeholder = "Last Name", @class = "input-box", @id = "Text1", @type = "text", value = Model.MVUser.LastName })
+            @Html.TextBoxFor(x => x.MVUser.LastName, new { placeholder = "Last Name", @class = "input-box", @id = "Text1", @type = "text" })
             <br />@Html.ValidationMessageFor(x => x.MVUser.LastName, "", new { @class = "error" })
             <br /><br />
 
 
-            @Html.TextBoxFor(x => x.MVUser.Email, new { placeholder = "Email", @class = "input-box", @id = "Text1", @type = "email", value = Model.MVUser.Email })
+            @Html.TextBoxFor(x => x.MVUser.Email, new { placeholder = "Email", @class = "input-box", @id = "Text1", @type = "email" })
             <br />@Html.ValidationMessageFor(x => x.MVUser.Email, "", new { @class = "error" })
             <br /><br />
 
 
-            @Html.TextBoxFor(x => x.MVUser.Password, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password", value = Model.MVUser.Password })
+            @Html.TextBoxFor(x => x.MVUser.Password, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password" })
             <br />@Html.ValidationMessageFor(x => x.MVUser.Password, "", new { @class = "error" })
             <br /><br />
 
 
+            @Html.TextBoxFor(x => x.MVUser.ConfirmPassword, new { placeholder = "Password", @class = "input-box", @id = "Text1", @type = "password" })
+            <br />@Html.ValidationMessageFor(x => x.MVUser.ConfirmPassword, "", new { @class = "error" })
+            <br /><br />
 
-            <input id="submit1" type="submit" class="sign-btn" value="Sign in">
 
+
+            <input id="submit1" type="submit" class="sign-btn" value="Sign in" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+        }
+        @using (Html.BeginForm("HomeLogin", "Login", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
         }
 
 

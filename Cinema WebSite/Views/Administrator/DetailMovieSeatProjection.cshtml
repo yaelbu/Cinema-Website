@@ -1,0 +1,159 @@
+﻿@model Cinema_WebSite.ModelView.CineViewModel
+@using Cinema_WebSite.Models
+@{
+    ViewBag.Title = "DetailsMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+
+        .ui-datepicker-trigger {
+            float: inherit;
+            glyph-orientation-vertical: auto;
+        }
+
+        body {
+            background: url('/images/background_cine.jpg');
+            background-size: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            margin-left: 10px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+            .container
+
+        {
+            width: 300px;
+            height: 75px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .sign-up-form {
+            width: 88%;
+            height: 310px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: black;
+            border-radius: 5px;
+        }
+
+    </style>
+
+</head>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<body>
+
+    <div class="container">
+        @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+        {
+            <input id="submit1" type="submit" class="sign-btn" value="Manage Movies" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+        }
+        @using (Html.BeginForm("BackManageMoviesProjection", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Movies Projection" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ChangePasswordAdmin", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Change Password" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ManagePrices", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Prices" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Halls" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+    </div>
+
+    <div class="sign-up-form">
+
+        <h1 style="font-weight:bold">@Html.DisplayFor(X => X.MVMovieProjection.Title)</h1>
+        <br />
+        <label style="font-size:16px">   @Html.DisplayFor(X => X.MVMovieProjection.ProjectionDate) : @Html.DisplayFor(X => X.MVMovieProjection.BeginProjectionHour) to @Html.DisplayFor(X => X.MVMovieProjection.EndProjectionHour)</label>
+
+
+        <table>
+            <tr>
+                <th>Hall</th>
+                <th>Seat Number</th>
+                <th>Seat Status</th>
+
+            </tr>
+            @foreach (SeatHallProjection x in Model.MVMSeatsHall)
+            {
+
+
+
+                <tr>
+                    <td>@x.Hall_Name</td>
+                    <td>@x.SeatNumber</td>
+                    <td>@x.StatusSeat</td>
+
+
+
+
+                </tr>
+
+
+            }
+        </table>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>

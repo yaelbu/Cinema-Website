@@ -27,6 +27,49 @@
             background: url('/images/background_cine.jpg');
             background-size: 100%;
         }
+
+
+        th, td {
+            border: 1px solid black;
+            margin-left: 10px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .field-validation-error {
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .container {
+            width: 90%;
+            height: 100px;
+            display: flex;
+            padding:20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .sign-up-form {
+            width: 90%;
+            height: 300px;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: darkgray;
+        }
+
     </style>
 
 </head>
@@ -43,49 +86,126 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <body>
 
-    <h1>Update movie</h1>
 
-    @using (Html.BeginForm("SaveUpdateHall", "Administrator", FormMethod.Post))
+
+    @if (ViewBag.message10 != null)
     {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Movie Update</h4>
-            <hr />
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.MVHall.Id)
-
-        <div>
-            <i>Title :</i>
-            @Html.TextBoxFor(x => x.MVHall.Hall_Name, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
-            <br />@Html.ValidationMessageFor(x => x.MVHall.Hall_Name, "", new { @class = "error" })
-            <br />
-
-
-
-            <i>Category : </i>
-            @Html.TextBoxFor(x => x.MVHall.Capacity, new { placeholder = "Title", @class = "input-box", @id = "Text1", @type = "text" })
-            <br />@Html.ValidationMessageFor(x => x.MVHall.Capacity, "", new { @class = "error" })
-            <br /><br />
-
-
-
-
-
-        </div>
-        </div>
-        <input id="submit1" type="submit" class="sign-btn" value="Save Changement">
-
-        using (Html.BeginForm("BackManageHalls", "Administrator", FormMethod.Post))
-        {
-            <input id="submit1" type="submit" class="sign-btn" value="Back Manage Movies">
-
-        }
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@ViewBag.message10');
+            };
+        </script>
     }
 
-</body>
-</html>
+
+
+
+
+
+
+    <div class="container">
+        @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+        {
+            <input id="submit1" type="submit" class="sign-btn" value="Manage Movies" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+        }
+        @using (Html.BeginForm("BackManageMoviesProjection", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Movies Projection" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ChangePasswordAdmin", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Change Password" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("ManagePrices", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Prices" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+
+        @using (Html.BeginForm("BackManageHalls", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Manage Halls" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+        @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
+        {
+            <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+        }
+    </div>
+
+
+
+
+
+
+
+    <div class="sign-up-form">
+        <h1 style="text-align:left">Update Hall : @Html.DisplayFor(model => model.MVHall.Hall_Name)</h1>
+        @using (Html.BeginForm("AddSeatHall", "Administrator", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MVHall.Hall_Name)
+            @Html.HiddenFor(model => model.MVHall.Capacity)
+            <div style="margin-left: 20px">
+
+
+
+
+
+
+
+
+
+
+                <br />
+                <i>Add a new seat :</i>
+                @Html.EditorFor(x => x.MVMSeat.SeatNumber, new { placeholder = "SeatNumber", @class = "form-control", @id = "Text1", @type = "text" })
+                <br />@Html.ValidationMessageFor(x => x.MVMSeat.SeatNumber, "", new { @class = "error" })
+                <br />
+
+
+
+
+
+                <br />
+                <input id="submit1" type="submit" class="sign-btn" value="Confirm" style="margin-bottom: 10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+
+            </div>
+        }
+
+
+    </div>
+    <br /><br />
+    <table>
+
+        <tr>
+            <th>Seat Number</th>
+            <th></th>
+        </tr>
+        @foreach (Seats seat in Model.MVMSeats)
+        {
+
+
+            <tr>
+
+                <td>@seat.SeatNumber</td>
+                <td>
+                    @using (Html.BeginForm("DeleteSeat", "Administrator", new { id = seat.Id }))
+                    {
+                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete the seat number @seat.SeatNumber');" />
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    <br />
 
 
 

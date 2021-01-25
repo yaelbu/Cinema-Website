@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Index</title>
+    <title>@ViewBag.Title </title>
     <style>
 
     
@@ -19,6 +19,30 @@
             background: url('/images/background_cine.jpg');
             background-size: 100%;
         }
+        .sign-up-form {
+            width: 325px;
+            height: 545px;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            top:100px;
+            padding: 20px;
+            margin: 8% auto 0;
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 55px;
+            background-color: rgba(201, 150, 115, 0.8);
+            border-color: darkgray;
+        }
+        .container {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
     </style>
 
 </head>
@@ -35,54 +59,60 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 <body>
-    <div>
+ 
 
-        <dl  style="align-items:normal;">
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Title) : @Html.DisplayFor(x => x.MVMovie.Title)
+        <div class="container">
+            @using (Html.BeginForm("AdministratorHome", "Administrator", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Home" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
+            @using (Html.BeginForm("BackManageMovies", "Administrator", FormMethod.Post))
+            {
+                <input id="submit1" type="submit" class="sign-btn" value="Manage Movies" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+            }
 
-
-            </dt>
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Hall): @Html.DisplayFor(x => x.MVMovie.Hall)
-            </dt>
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Limitation_Age) : @Html.DisplayFor(x => x.MVMovie.Limitation_Age)
-            </dt>
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Category) : @Html.DisplayFor(x => x.MVMovie.Category)
-            </dt>
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Price) : @Html.DisplayFor(x => x.MVMovie.Price)
-            </dt>
-
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.Date) : @Html.DisplayFor(x => x.MVMovie.Date)
-            </dt>
-
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.BeginHourMovie) : @Html.DisplayFor(x => x.MVMovie.BeginHourMovie)
-            </dt>
-
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.EndHourMovie) : @Html.DisplayFor(x => x.MVMovie.EndHourMovie)
-            </dt>
-
-
-
-            <dt>
-                @Html.DisplayNameFor(x => x.MVMovie.ImagePath) : <img src="@Url.Content(Model.MVMovie.ImagePath)" height="100" width="100" />
-            </dt>
-
-        </dl>
+            @using (Html.BeginForm("BackManageMoviesProjection", "Administrator", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Manage Movies Projection" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
+            @using (Html.BeginForm("ManagePrices", "Administrator", FormMethod.Post))
+            {
+                <input id="submit1" type="submit" class="sign-btn" value="Manage Prices" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+            }
+            @using (Html.BeginForm("ManageHalls", "Administrator", FormMethod.Post))
+            {
+                <input id="submit1" type="submit" class="sign-btn" value="Manage Halls" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;">
+            }
+            @using (Html.BeginForm("ChangePasswordAdmin", "Administrator", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Change Password" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
+            @using (Html.BeginForm("Logout", "Administrator", FormMethod.Post))
+            {
+                <input id="Submit1" type="submit" value="Log out" style="margin:10px;border-radius: 6px; background-color:black; color:white; padding: 8px 20px;" />
+            }
 
 
-    </div>
-    <div style="margin-top:400px; margin-left:40px">
 
-        @Html.ActionLink("Back to Manage Movies", "BackManageMovies")
-    </div>
+        </div>
 
+
+
+        <div class="sign-up-form">
+            <h1 style="font-weight:bold; text-decoration: underline;">@Html.DisplayFor(x => x.MVMovie.Title)</h1>
+            <br />
+            <img src="@Url.Content(Model.MVMovie.Poster)" height="300" width="220" />
+            <br /><br /><br />
+            <dt style="font-size:12px">Category : @Html.DisplayFor(x => x.MVMovie.Category)</dt>
+            <dt>Realisator : @Html.DisplayFor(x => x.MVMovie.Realisator)</dt>
+            <dt>Release date : @Html.DisplayFor(x => x.MVMovie.ReleaseDate) </dt>
+            <dt>Running time : @Html.DisplayFor(x => x.MVMovie.RunningTime)minutes</dt>
+            <dt>Price Movie : @Html.DisplayFor(x => x.MVMovie.Price)</dt>
+
+
+
+
+        </div>
 
 
 

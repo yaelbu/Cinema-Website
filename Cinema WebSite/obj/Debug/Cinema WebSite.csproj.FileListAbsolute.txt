@@ -107,3 +107,5 @@ C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Diagnostics.Diag
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Interactive.Async.xml
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\obj\Debug\Cinema WebSite.csprojAssemblyReference.cache
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\PayPal.dll
+C:\Users\yaelb\Desktop\Cinema WebSite\Cinema WebSite\bin\PayPal.xml
